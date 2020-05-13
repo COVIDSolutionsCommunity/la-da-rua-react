@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export default makeStyles(theme => ({
+export default makeStyles(() => ({
   img: {
 		width: '250px',
     height: '346px',
@@ -28,15 +28,15 @@ export default makeStyles(theme => ({
     fontSize: 32,
 	},
 	pink: {
-		backgroundColor: theme.palette.custom.pink,
+		backgroundColor: '#DC8474',
 	},
 	green: {
-		backgroundColor: theme.palette.custom.green,
+		backgroundColor: '#83B4BB',
 	},
 	blue: {
-		backgroundColor: theme.palette.custom.blue,
+		backgroundColor: '#ADC26D',
 	},
 	yellow: {
-		backgroundColor: theme.palette.custom.yellow,
+		backgroundColor: '#F6F193',
 	},
 }))
