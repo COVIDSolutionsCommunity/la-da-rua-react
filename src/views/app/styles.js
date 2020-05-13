@@ -5,7 +5,8 @@ export default makeStyles(theme => ({
     backgroundImage: 'url(https://live.staticflickr.com/7514/27090023343_86beb47893_b.jpg)',
     backgroundRepeat: 'repeat',
     width: '100vw',
-    height: '100vh',
+		height: '100%',
+		paddingBottom: '32px',
   },
   header: {
     backgroundColor: 'rgba(0,0,0, 0,5)',
@@ -21,6 +22,6 @@ export default makeStyles(theme => ({
     textTransform: 'uppercase',
     fontSize: 28,
     fontWeight: 'bold',
-    margin: '0 16px',
+		margin: '0 16px',
   },
 }))

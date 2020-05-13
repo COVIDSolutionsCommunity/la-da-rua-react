@@ -14,7 +14,7 @@ const App = ({ children }) => {
 
   return (
     <Grid container className={styles.container}>
-      <AppBar color="secondary" position="fixed" className={styles.header}>
+      <AppBar color="secondary" position="static" className={styles.header}>
         <Toolbar>
           <RouterLink to="/">
             <img alt="Logo" src={logo} />

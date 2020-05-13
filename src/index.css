@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Fjalla One', 'Oswal';
+  font-family: 'Tw Cen MT Condensed';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'Fjalla One', 'Oswal';
+  font-family: 'Tw Cen MT Condensed',
 }
 
 html,

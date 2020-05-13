@@ -13,7 +13,8 @@ export default makeStyles(() => ({
     fontFamily: 'Tw Cen MT Condensed',
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    marginTop: 32,
+		marginTop: 32,
+		fontSize: '24px',
     color: 'black',
   },
 }))

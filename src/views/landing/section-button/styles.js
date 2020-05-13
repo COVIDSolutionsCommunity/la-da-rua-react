@@ -16,6 +16,7 @@ export default makeStyles(() => ({
     backgroundColor: 'black',
   },
   button: {
+		fontFamily: 'Tw Cen MT Condensed',
     position: 'absolute',
     zIndex: 3,
     top: '40%',
