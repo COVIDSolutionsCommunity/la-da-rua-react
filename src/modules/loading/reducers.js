@@ -3,7 +3,6 @@
 export default (state = {}, action) => {
 	const { type } = action
 	const matches = /(.*)_(PENDING|FULFILLED|REJECTED)/.exec(type)
-	console.log('matches', matches)
 
 	// not a *_REQUEST / *_SUCCESS /  *_FAILURE actions, so we ignore them
 	if (!matches) return state

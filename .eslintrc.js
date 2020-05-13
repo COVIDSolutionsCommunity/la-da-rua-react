@@ -1,53 +1,36 @@
+require('babel-register')
+
 module.exports = {
-	'env': {
-		'browser': true,
-		'es6': true,
-		'commonjs': true,
-		'node': true,
-	},
-	'extends': [
-		'eslint:recommended',
-		'plugin:react/recommended',
-		'prettier',
-		'prettier/react'
-	],
-	'globals': {
-		'Atomics': 'readonly',
-		'SharedArrayBuffer': 'readonly'
-	},
-	parser: 'babel-eslint',
-	'parserOptions': {
-		'ecmaFeatures': {
-			'jsx': true
-		},
-		'ecmaVersion': 11,
-		'sourceType': 'module'
-	},
-	'plugins': [
-		'react',
-	],
-	'rules': {
-		'indent': [
-			'error',
-			'tab'
-		],
-		'linebreak-style': [
-			'error',
-			'unix'
-		],
-		'quotes': [
-			'error',
-			'single'
-		],
-		'semi': [
-			'error',
-			'never'
-		],
-		'react/jsx-filename-extension': [
-		  'warn',
-		  {extensions: ['.js', '.jsx']}
-		],
-		'import/prefer-default-export': 'off',
-		'jsx-quotes': ['error', 'prefer-single']
-	}
+  env: {
+    browser: true,
+    es6: true,
+  },
+  extends: ['airbnb', 'prettier', 'prettier/react'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  plugins: ['react', 'prettier', 'react-hooks'],
+  rules: {
+		'no-multiple-empty-lines': [
+      'error',
+      {
+        max: 1,
+        maxEOF: 1,
+        maxBOF: 0,
+      },
+    ],
+		'arrow-parens': ['error', 'as-needed'],
+    semi: ['error', 'never'],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'import/no-unresolved': 'off',
+    'no-param-reassign': [2, { props: false }],
+  },
 }
