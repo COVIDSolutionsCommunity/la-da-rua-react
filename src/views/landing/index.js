@@ -50,7 +50,14 @@ const LandingPage = () => {
         </Grid>
       </Grid>
       <Grid container justify="center">
-        {sectionButtons.map(section => <SectionButton key={section.label} label={section.name} color={section.color} img={section.img} />)}
+        {sectionButtons.map((section) => (
+          <SectionButton
+            key={section.label}
+            label={section.name}
+            color={section.color}
+            img={section.img}
+          />
+        ))}
       </Grid>
     </Grid>
   )

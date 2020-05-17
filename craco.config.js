@@ -16,7 +16,7 @@ const rewireBabelLoader = require('craco-babel-loader')
 // helpers
 
 const appDirectory = fs.realpathSync(process.cwd())
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
 module.exports = {
   style: {
