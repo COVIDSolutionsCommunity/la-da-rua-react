@@ -2,7 +2,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
   container: {
-    backgroundImage: 'url(https://live.staticflickr.com/7514/27090023343_86beb47893_b.jpg)',
+    backgroundImage:
+      'url(https://uploaddeimagens.com.br/images/002/655/312/original/Desktop_-_1_%281%29.png?1589725718)',
     backgroundRepeat: 'repeat',
     width: '100vw',
     height: '100%',
@@ -14,6 +15,10 @@ export default makeStyles((theme) => ({
   content: {
     marginTop: 80,
     width: '100%',
+
+    [theme.breakpoints.down('md')]: {
+      height: '100vh',
+    },
   },
   link: {
     fontFamily: 'Oswald',
@@ -23,8 +28,14 @@ export default makeStyles((theme) => ({
     fontSize: 24,
     fontWeight: '500',
     margin: '0 16px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   logo: {
     height: 35,
+  },
+  show: {
+    display: 'block',
   },
 }))

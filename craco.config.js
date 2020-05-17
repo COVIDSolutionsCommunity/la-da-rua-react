@@ -42,6 +42,19 @@ module.exports = {
     },
   },
   webpack: {
+    // rules: [
+    //   {
+    //     test: /\.(png|jp(e*)g|svg|gif)$/,
+    //     use: [
+    //       {
+    //         loader: 'file-loader',
+    //         options: {
+    //           name: 'images/[hash]-[name].[ext]',
+    //         },
+    //       },
+    //     ],
+    //   },
+    // ],
     alias: {
       utils: path.resolve(__dirname, 'src/utils/'),
       services: path.resolve(__dirname, 'src/services/'),

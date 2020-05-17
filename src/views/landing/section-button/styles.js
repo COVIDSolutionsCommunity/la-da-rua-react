@@ -1,11 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
   img: {
-    width: '250px',
+    width: '100%',
     height: '346px',
     '&:hover': {
       opacity: 0.6,
+    },
+
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      height: '100px',
+      objectFit: 'cover',
     },
   },
   section: {
@@ -14,9 +20,14 @@ export default makeStyles(() => ({
     width: '250px',
     height: '346px',
     backgroundColor: 'black',
+
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      height: '110px',
+      objectFit: 'cover',
+    },
   },
   button: {
-    fontFamily: 'Tw Cen MT Condensed',
     position: 'absolute',
     zIndex: 3,
     top: '40%',

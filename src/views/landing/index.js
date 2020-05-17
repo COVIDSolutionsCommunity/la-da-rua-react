@@ -1,6 +1,5 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 
 import food from 'assets/comida.png'
 import colagem from 'assets/colagem_logo.png'
@@ -40,16 +39,11 @@ const LandingPage = () => {
 
   return (
     <Grid className={styles.container}>
-      <Grid container justify="center" alignItems="flex-end">
+      <Grid container justify="center" alignItems="center">
         <img className={styles.logo} alt="logo" src={colagem} />
-        <Grid xs={4} alignItems="center" container>
-          <img alt="Lá da rua" src={logo} />
-          <Typography className={styles.title} component="h1" variant="h2">
-            Microempreendedores da minha, da sua e das nossas ruas
-          </Typography>
-        </Grid>
+        <img alt="Lá da rua" src={logo} className={styles.mainLogo} />
       </Grid>
-      <Grid container justify="center">
+      <Grid className={styles.link}>
         {sectionButtons.map((section) => (
           <SectionButton
             key={section.label}
