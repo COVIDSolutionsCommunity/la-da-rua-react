@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import logo from 'assets/logo_header.png'
+import footer from 'assets/rodape.png'
 
 import useStyles from './styles'
 
@@ -25,7 +26,7 @@ const App = ({ children }) => {
             <Link component={RouterLink} className={styles.link} to="/">
               Início
             </Link>
-            <Link component={RouterLink} className={styles.link} to="/">
+            <Link component={RouterLink} className={styles.link} to="/quem-somos">
               Quem somos
             </Link>
             <Link component={RouterLink} className={styles.link} to="/">
@@ -40,7 +41,12 @@ const App = ({ children }) => {
           </Grid>
         </Toolbar>
       </AppBar>
-      <Grid className={styles.content}>{children}</Grid>
+      <Grid item className={styles.content}>
+        {children}
+      </Grid>
+      <Grid item className={styles.footer}>
+        <img className={styles.img} alt="Rodapé" src={footer} />
+      </Grid>
     </Grid>
   )
 }

@@ -14,6 +14,7 @@ import { Router } from '@reach/router'
 import rootReducer from 'modules/reducers'
 import App from 'views/app'
 import LandingPage from 'views/landing'
+import WhoWeAre from 'views/who-we-are'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -42,14 +43,16 @@ const theme = createMuiTheme({
   },
   typography: {
     h1: {
-      fontSize: '32px',
+      fontSize: '56px',
       fontWeight: 'bold',
       fontFamily: 'Oswald',
+      lineHeight: 1.5,
     },
     h2: {
-      fontSize: '20px',
+      fontSize: '24px',
       fontWeight: '500',
       fontFamily: 'Oswald',
+      lineHeight: 1.5,
     },
     h3: {
       fontSize: '14px',
@@ -125,6 +128,7 @@ ReactDOM.render(
       <Router>
         <App path="/">
           <LandingPage path="/" />
+          <WhoWeAre path="/quem-somos" />
         </App>
       </Router>
     </ThemeProvider>

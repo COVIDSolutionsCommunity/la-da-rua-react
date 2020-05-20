@@ -4,7 +4,7 @@ export default makeStyles((theme) => ({
   container: {
     backgroundImage:
       'url(https://uploaddeimagens.com.br/images/002/655/312/original/Desktop_-_1_%281%29.png?1589725718)',
-    backgroundRepeat: 'repeat',
+    backgroundSize: 'cover',
     width: '100vw',
     height: '100%',
     paddingBottom: '32px',
@@ -15,6 +15,7 @@ export default makeStyles((theme) => ({
   content: {
     marginTop: 80,
     width: '100%',
+    height: '100vh',
 
     [theme.breakpoints.down('md')]: {
       height: '100vh',
@@ -37,5 +38,14 @@ export default makeStyles((theme) => ({
   },
   show: {
     display: 'block',
+  },
+  footer: {
+    height: '70%',
+    margin: '50px auto 10px',
+  },
+  img: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
 }))
