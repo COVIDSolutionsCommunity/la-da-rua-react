@@ -1,18 +1,29 @@
 import produce from 'immer'
+import cookies from 'react-cookies'
 
 import { createReducer } from 'utils/redux'
 
-import { GET_MUSIC } from './actions'
+import { REGISTER_USER } from './actions'
 
 const INITIAL_STATE = {
-  fullName: '',
+  key: cookies.load('key'),
+  firstName: '',
+  lastName: '',
+  profileImage: '',
+  gender: '',
+  username: '',
+  pk: '',
 }
 
 const user = createReducer(INITIAL_STATE, {
-  [GET_MUSIC.FULFILLED]: (state, { payload }) =>
-    produce(state, (previousState) => {
-      previousState.fullName = payload.name
-    }),
+  [REGISTER_USER.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      cookies.save('key', payload.key)
+      previousState.key = payload.key
+      // eslint-disable-next-line no-return-assign
+      Object.keys(payload.user).map((key) => (previousState[key] = payload.user[key]))
+    })
+  },
 })
 
 export default user

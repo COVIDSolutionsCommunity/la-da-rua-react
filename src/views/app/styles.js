@@ -15,10 +15,10 @@ export default makeStyles((theme) => ({
   content: {
     marginTop: 80,
     width: '100%',
-    height: '100vh',
+    height: '100%',
 
     [theme.breakpoints.down('md')]: {
-      height: '100vh',
+      height: '100%',
     },
   },
   link: {
@@ -41,7 +41,7 @@ export default makeStyles((theme) => ({
   },
   footer: {
     height: '70%',
-    margin: '50px auto 10px',
+    margin: '0 auto 10px',
   },
   img: {
     [theme.breakpoints.down('sm')]: {

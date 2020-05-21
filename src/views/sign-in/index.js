@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -10,6 +10,13 @@ import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete'
 import IconButton from '@material-ui/core/IconButton'
 import Link from '@material-ui/core/Link'
+import { useDispatch, useSelector } from 'react-redux'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { useNavigate } from '@reach/router'
+
+import { registerUser } from 'modules/user/actions'
+import { isRegisterLoading } from 'modules/user/selectors'
+import { usePrevious } from 'utils/hooks'
 
 import useStyles from './styles'
 import GeneralInput from './general-input'
@@ -55,9 +62,13 @@ const INITIAL_STATE = {
 
 const SignIn = () => {
   const styles = useStyles()
+  const dispatch = useDispatch()
   const [values, setValues] = useState(INITIAL_STATE)
   const [errors, setErros] = useState('')
   const [profilePicture, setProfilePicture] = useState([])
+  const isLoading = useSelector(isRegisterLoading)
+  const wasLoading = usePrevious(isLoading)
+  const navigate = useNavigate()
 
   const onChangePicture = useCallback((event) => {
     const file = event.currentTarget.files[0]
@@ -79,19 +90,46 @@ const SignIn = () => {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault()
+      if (values.password1 !== values.password2) {
+        setErros((prevValues) => ({ ...prevValues, password1: 'As senhas devem ser iguais' }))
+        return
+      }
+      if (values.password1.length < 6) {
+        setErros((prevValues) => ({
+          ...prevValues,
+          password1: 'As senha deve ter mais que 6 caracteres',
+        }))
+        return
+      }
       if (
         !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           values.email
         )
       ) {
         setErros((prevValues) => ({ ...prevValues, email: 'Insira um email válido' }))
+        return
       }
+      const { fullName, ...payload } = values
+      dispatch(
+        registerUser({
+          ...payload,
+          firstName: values.fullName.split(' ')[0],
+          lastName: values.fullName.split(' ').slice(1).join(' '),
+          profileImage: profilePicture.id,
+        })
+      )
     },
-    [values.email]
+    [dispatch, profilePicture.id, values]
   )
 
+  useEffect(() => {
+    if (!isLoading && wasLoading) {
+      navigate('/')
+    }
+  }, [isLoading, navigate, wasLoading])
+
   return (
-    <Grid className={styles.header} container alignItems="center" direction="row">
+    <Grid item className={styles.header} container alignItems="center" direction="row">
       <Grid className={styles.section} item>
         <Typography color="primary" className={styles.title} component="h1" variant="h1">
           CADASTRE-SE JÁ
@@ -143,27 +181,28 @@ const SignIn = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={10} container direction="row">
-              <Grid item>
-                <label htmlFor="icon-button-file" className={styles.fullWidth}>
-                  <input
-                    accept="image/*"
-                    type="file"
-                    onChange={onChangePicture}
-                    id="icon-button-file"
-                    style={{ display: 'none' }}
-                  />
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    component="span"
-                    className={styles.button}
-                    startIcon={<CloudUploadIcon />}
-                  >
-                    Selecione uma imagem de perfil
-                  </Button>
-                </label>
-              </Grid>
+            <Grid item xs={10}>
+              <label htmlFor="icon-button-file" className={styles.fullWidth}>
+                <input
+                  accept="image/jpeg, image/png"
+                  type="file"
+                  onChange={onChangePicture}
+                  id="icon-button-file"
+                  style={{ display: 'none' }}
+                />
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  component="span"
+                  className={styles.button}
+                  fullWidth
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Selecione uma imagem de perfil
+                </Button>
+              </label>
+            </Grid>
+            <Grid item xs={10}>
               {profilePicture.url && (
                 <Grid item className={styles.deleteButton}>
                   <IconButton onClick={onDeleteClick} className={styles.buttonIcon}>
@@ -187,8 +226,9 @@ const SignIn = () => {
                 color="primary"
                 type="submit"
                 className={styles.button}
+                disabled={isLoading}
               >
-                CADASTRE-SE
+                {isLoading ? <CircularProgress size={24} /> : 'CADASTRE-SE'}
               </Button>
             </Grid>
           </Grid>

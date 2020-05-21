@@ -76,7 +76,9 @@ const theme = createMuiTheme({
     },
   },
   root: {
-    backgroundColor: 'white',
+    backgroundImage:
+      'url(https://uploaddeimagens.com.br/images/002/655/312/original/Desktop_-_1_%281%29.png?1589725718)',
+    backgroundSize: 'cover',
     fontFamily: 'Oswald',
     button: {
       textTransform: 'capitalize',

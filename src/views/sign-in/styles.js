@@ -3,7 +3,9 @@ import { makeStyles } from '@material-ui/core/styles'
 export default makeStyles((theme) => ({
   header: {
     marginTop: '-80px',
+    paddingBottom: theme.spacing(3),
     height: '100%',
+    boxSizing: 'border-box',
   },
   title: {
     [theme.breakpoints.down('sm')]: {
@@ -12,7 +14,7 @@ export default makeStyles((theme) => ({
     },
   },
   section: {
-    padding: '65px 45px 65px 150px',
+    padding: '65px 45px 100px 150px',
     boxSizing: 'border-box',
     backgroundColor: 'rgba(12,12,12,0.75)',
     height: '100%',
@@ -66,16 +68,15 @@ export default makeStyles((theme) => ({
     height: '58px',
   },
   deleteButton: {
-    width: '420px',
-    marginLeft: 'auto',
+    height: '58px',
     backgroundColor: 'transparent',
     border: '1px solid white',
     borderRadius: '4px',
     textDecoration: 'none',
     padding: theme.spacing(2),
+    boxSizing: 'border-box',
     display: 'flex',
     alignSelf: 'center',
-    boxSizing: 'border-box',
 
     [theme.breakpoints.down('sm')]: {
       marginTop: '16px',

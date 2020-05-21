@@ -45,7 +45,7 @@ const App = ({ children }) => {
           </Grid>
         </Toolbar>
       </AppBar>
-      <Grid item className={styles.content}>
+      <Grid container item className={styles.content}>
         {children}
       </Grid>
       <Grid item className={styles.footer}>
