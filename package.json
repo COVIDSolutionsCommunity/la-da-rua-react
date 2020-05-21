@@ -19,6 +19,7 @@
     "craco-babel-loader": "^0.1.4",
     "craco-less": "^1.16.0",
     "eslint-plugin-react-hooks": "^4.0.1",
+    "formik": "^2.1.4",
     "humps": "^2.0.1",
     "immer": "^6.0.5",
     "moment": "^2.25.3",

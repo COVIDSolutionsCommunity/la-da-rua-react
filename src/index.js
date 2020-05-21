@@ -15,6 +15,7 @@ import rootReducer from 'modules/reducers'
 import App from 'views/app'
 import LandingPage from 'views/landing'
 import WhoWeAre from 'views/who-we-are'
+import SignIn from 'views/sign-in'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -86,15 +87,10 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
-    MuiDialogTitle: {
-      root: {
-        fontSize: '2px',
-      },
-    },
-    MuiSvgIcon: {
-      root: {
-        height: '20px',
-        width: '20px',
+    MuiSelect: {
+      outlined: {
+        borderColor: 'white',
+        color: 'white',
       },
     },
     MuiTypography: {
@@ -104,19 +100,32 @@ const theme = createMuiTheme({
       },
     },
     MuiFormLabel: {
+      focused: {
+        borderColor: '1px solid white',
+      },
       root: {
-        fontSize: '16px',
+        // fontSize: '16px',
+        color: 'white',
       },
     },
     MuiInputBase: {
       input: {
         fontSize: '16px',
         lineHeight: 'normal',
+        borderColor: 'white',
+      },
+    },
+    MuiOutlinedInput: {
+      focused: {
+        borderColor: 'white',
+      },
+      notchedOutline: {
+        borderColor: 'white',
       },
     },
     MuiButton: {
       containedPrimary: {
-        color: 'white',
+        color: '#fff',
       },
     },
   },
@@ -129,6 +138,7 @@ ReactDOM.render(
         <App path="/">
           <LandingPage path="/" />
           <WhoWeAre path="/quem-somos" />
+          <SignIn path="/cadastre-se" />
         </App>
       </Router>
     </ThemeProvider>

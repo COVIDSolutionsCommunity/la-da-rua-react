@@ -35,7 +35,11 @@ const App = ({ children }) => {
             <Link component={RouterLink} className={styles.link} to="/">
               Parcerias
             </Link>
-            <Link component={RouterLink} className={classnames(styles.link, styles.show)} to="/">
+            <Link
+              component={RouterLink}
+              className={classnames(styles.link, styles.show)}
+              to="/cadastre-se"
+            >
               Cadastre-se
             </Link>
           </Grid>
