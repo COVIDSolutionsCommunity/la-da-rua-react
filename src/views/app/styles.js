@@ -5,16 +5,15 @@ export default makeStyles((theme) => ({
     backgroundImage:
       'url(https://uploaddeimagens.com.br/images/002/655/312/original/Desktop_-_1_%281%29.png?1589725718)',
     backgroundSize: 'cover',
-    width: '100vw',
     height: '100%',
     paddingBottom: '32px',
+    overflowX: 'hidden',
   },
   header: {
     backgroundColor: 'rgba(0,0,0, 0,5)',
   },
   content: {
     marginTop: 80,
-    width: '100%',
     height: '100%',
 
     [theme.breakpoints.down('md')]: {

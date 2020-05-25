@@ -1,9 +1,10 @@
+/* eslint-disable no-shadow */
 import produce from 'immer'
 import cookies from 'react-cookies'
 
 import { createReducer } from 'utils/redux'
 
-import { REGISTER_USER } from './actions'
+import { REGISTER_USER, LOGIN, CREATE_SELLER, GET_SELLER, UPDATE_SELLER } from './actions'
 
 const INITIAL_STATE = {
   key: cookies.load('key'),
@@ -13,15 +14,58 @@ const INITIAL_STATE = {
   gender: '',
   username: '',
   pk: '',
+  seller: {
+    name: '',
+    description: '',
+    neighborhood: '',
+    telephoneNumber: '',
+    city: '',
+    state: '',
+    category: '',
+    isApproved: false,
+    products: [],
+    slug: '',
+  },
 }
+
+const setObjectKeys = (previousState, value) =>
+  // eslint-disable-next-line no-return-assign
+  Object.keys(value).map((key) => (previousState[key] = value[key]))
 
 const user = createReducer(INITIAL_STATE, {
   [REGISTER_USER.FULFILLED]: (state, { payload }) => {
     return produce(state, (previousState) => {
       cookies.save('key', payload.key)
       previousState.key = payload.key
-      // eslint-disable-next-line no-return-assign
-      Object.keys(payload.user).map((key) => (previousState[key] = payload.user[key]))
+      setObjectKeys(previousState, payload.user)
+    })
+  },
+  [LOGIN.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      cookies.save('key', payload.key)
+      previousState.key = payload.key
+      setObjectKeys(previousState, payload.user)
+    })
+  },
+  [CREATE_SELLER.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      const { user, ...values } = payload
+      setObjectKeys(previousState, payload.user)
+      setObjectKeys(previousState.seller, values)
+    })
+  },
+  [UPDATE_SELLER.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      const { user, ...values } = payload
+      setObjectKeys(previousState, payload.user)
+      setObjectKeys(previousState.seller, values)
+    })
+  },
+  [GET_SELLER.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      const { user, ...values } = payload
+      setObjectKeys(previousState, payload.user)
+      setObjectKeys(previousState.seller, values)
     })
   },
 })

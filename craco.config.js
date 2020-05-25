@@ -42,25 +42,13 @@ module.exports = {
     },
   },
   webpack: {
-    // rules: [
-    //   {
-    //     test: /\.(png|jp(e*)g|svg|gif)$/,
-    //     use: [
-    //       {
-    //         loader: 'file-loader',
-    //         options: {
-    //           name: 'images/[hash]-[name].[ext]',
-    //         },
-    //       },
-    //     ],
-    //   },
-    // ],
     alias: {
       utils: path.resolve(__dirname, 'src/utils/'),
       services: path.resolve(__dirname, 'src/services/'),
       modules: path.resolve(__dirname, 'src/modules/'),
       views: path.resolve(__dirname, 'src/views/'),
       assets: path.resolve(__dirname, 'src/assets/'),
+      components: path.resolve(__dirname, 'src/components/'),
     },
   },
   plugins: [

@@ -2,9 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
   container: {
-    display: 'grid',
-    gridTemplateRows: 'repeat(2, auto)',
-    gridGap: '52px',
+    margin: '0 auto',
   },
   logo: {
     marginRight: 32,
@@ -25,6 +23,7 @@ export default makeStyles((theme) => ({
     gridTemplateColumns: 'repeat(4, auto)',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: '0 auto',
 
     [theme.breakpoints.down('sm')]: {
       gridTemplateColumns: '1fr',

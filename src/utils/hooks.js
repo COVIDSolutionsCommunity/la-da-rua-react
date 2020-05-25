@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
+import { useNavigate } from '@reach/router'
+import { useSelector } from 'react-redux'
 
 export const useModal = (initialMode = false) => {
   const [modalOpen, setModalOpen] = useState(initialMode)
@@ -37,4 +39,13 @@ export const usePrevious = (value) => {
 
   // Return previous value (happens before update in useEffect above)
   return ref.current
+}
+
+export const useRedirect = () => {
+  const isLoggedIn = useSelector((state) => state.user.key)
+  const navigate = useNavigate()
+
+  if (!isLoggedIn) {
+    navigate('/')
+  }
 }

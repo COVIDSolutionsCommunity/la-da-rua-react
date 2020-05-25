@@ -38,12 +38,12 @@ const LandingPage = () => {
   const styles = useStyles()
 
   return (
-    <Grid className={styles.container}>
-      <Grid container justify="center" alignItems="center">
+    <Grid item container alignItems="center" className={styles.container} spacing={4}>
+      <Grid item container justify="center" alignItems="center">
         <img className={styles.logo} alt="logo" src={colagem} />
         <img alt="Lá da rua" src={logo} className={styles.mainLogo} />
       </Grid>
-      <Grid className={styles.link}>
+      <Grid item className={styles.link}>
         {sectionButtons.map((section) => (
           <SectionButton
             key={section.label}

@@ -16,6 +16,8 @@ import App from 'views/app'
 import LandingPage from 'views/landing'
 import WhoWeAre from 'views/who-we-are'
 import SignIn from 'views/sign-in'
+import Login from 'views/log-in'
+import CreateSeller from 'views/create-seller'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -37,6 +39,7 @@ const theme = createMuiTheme({
       blue: '#83B4BB',
       green: '#ADC26D',
       yellow: '#F6F193',
+      red: '#ff0000',
     },
     background: {
       default: 'white',
@@ -141,6 +144,8 @@ ReactDOM.render(
           <LandingPage path="/" />
           <WhoWeAre path="/quem-somos" />
           <SignIn path="/cadastre-se" />
+          <Login path="/login" />
+          <CreateSeller path="/sobre-seu-negocio" />
         </App>
       </Router>
     </ThemeProvider>
