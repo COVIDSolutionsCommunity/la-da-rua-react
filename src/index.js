@@ -18,6 +18,7 @@ import WhoWeAre from 'views/who-we-are'
 import SignIn from 'views/sign-in'
 import Login from 'views/log-in'
 import CreateSeller from 'views/create-seller'
+import Product from 'views/product'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -33,6 +34,9 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#222',
+    },
+    textSecondary: {
+      main: 'white',
     },
     custom: {
       pink: '#DC8474',
@@ -103,6 +107,9 @@ const theme = createMuiTheme({
         fontSize: '16px',
         lineHeight: '1.5',
       },
+      colorTextSecondary: {
+        color: 'white',
+      },
     },
     MuiFormLabel: {
       focused: {
@@ -114,10 +121,14 @@ const theme = createMuiTheme({
       },
     },
     MuiInputBase: {
+      root: {
+        color: 'white',
+      },
       input: {
         fontSize: '16px',
         lineHeight: 'normal',
         borderColor: 'white',
+        color: 'white',
       },
     },
     MuiOutlinedInput: {
@@ -129,6 +140,9 @@ const theme = createMuiTheme({
       },
     },
     MuiButton: {
+      root: {
+        height: '56px',
+      },
       containedPrimary: {
         color: '#fff',
       },
@@ -146,6 +160,7 @@ ReactDOM.render(
           <SignIn path="/cadastre-se" />
           <Login path="/login" />
           <CreateSeller path="/sobre-seu-negocio" />
+          <Product path="/produto" />
         </App>
       </Router>
     </ThemeProvider>

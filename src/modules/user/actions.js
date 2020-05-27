@@ -10,6 +10,7 @@ export const LOGIN = defineAction('LOGIN', REQUEST)
 export const CREATE_SELLER = defineAction('CREATE_SELLER', REQUEST)
 export const GET_SELLER = defineAction('GET_SELLER', REQUEST)
 export const UPDATE_SELLER = defineAction('UPDATE_SELLER', REQUEST)
+export const GET_PRODUCTS = defineAction('UPDATE_SELLER', REQUEST)
 
 export const registerUser = (payload) => (dispatch) => {
   return dispatch({
@@ -43,5 +44,12 @@ export const updateSeller = (payload) => (dispatch, getState) => {
   return dispatch({
     type: UPDATE_SELLER.ACTION,
     payload: userService.updateSeller(payload, getState().user.key),
+  })
+}
+
+export const getProducts = () => (dispatch, getState) => {
+  return dispatch({
+    type: GET_PRODUCTS.ACTION,
+    payload: userService.getProducts(getState().user.key),
   })
 }

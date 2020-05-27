@@ -10,3 +10,4 @@ export const isUpdatingSeller = ({ loading }) => !!loading[UPDATE_SELLER.ACTION]
 export const updateError = ({ error }) => error[UPDATE_SELLER.ACTION]
 
 export const getMySeller = (state) => state.user.seller
+export const getMyProducts = (state) => state.user.seller.products

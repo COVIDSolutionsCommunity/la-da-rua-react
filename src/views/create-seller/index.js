@@ -244,7 +244,7 @@ const CreateSeller = () => {
                 </InputLabel>
                 <Select
                   label="Gênero"
-                  value={values.gender}
+                  value={values.category}
                   name="category"
                   onChange={onChange}
                   classes={{

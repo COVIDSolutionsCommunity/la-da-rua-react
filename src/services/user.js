@@ -37,3 +37,5 @@ export const updateSeller = (payload, key) => {
 export const getSeller = (key) => get(key)('my-seller/')
 
 export const login = (payload) => post()('login/', payload)
+
+export const getProducts = (key) => get(key)('my-products/')
