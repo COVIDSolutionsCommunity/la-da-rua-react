@@ -39,3 +39,24 @@ export const getSeller = (key) => get(key)('my-seller/')
 export const login = (payload) => post()('login/', payload)
 
 export const getProducts = (key) => get(key)('my-products/')
+
+export const createProduct = (payload, key) => {
+  const newPayload = humps.decamelizeKeys(payload)
+  return post(key)(
+    'my-products/',
+    createFormData({ ...newPayload, image: payload.profileImage }),
+    false
+  )
+}
+
+export const updateProduct = (payload, key) => {
+  const { profileImage, ...newPayload } = humps.decamelizeKeys(payload)
+  if (payload?.coverImage) {
+    return patch(key)(
+      'my-products/',
+      createFormData({ ...humps.decamelizeKeys(newPayload), image: payload.profileImage }),
+      false
+    )
+  }
+  return patch(key)('my-products/', payload)
+}

@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useNavigate } from '@reach/router'
 
-import { createSeller, getProducts, updateSeller } from 'modules/user/actions'
-import { isCreatingSeller, getMySeller, isUpdatingSeller } from 'modules/user/selectors'
+import { createProduct, getProducts } from 'modules/user/actions'
+import { isCreatingProduct, getMyProducts, isUpdatingProduct } from 'modules/user/selectors'
 import { usePrevious, useRedirect } from 'utils/hooks'
 
 import useStyles from './styles'
@@ -24,30 +24,24 @@ const Product = () => {
   const styles = useStyles()
   const dispatch = useDispatch()
   const [values, setValues] = useState([INITIAL_STATE])
+  const [previousValues, setPreviousValues] = useState([])
   const [profilePicture, setProfilePicture] = useState([{ id: '', url: '' }])
-  const isCurrent = useSelector(getMySeller)
-  const isLoading = useSelector(isCreatingSeller)
+  const previousProducts = useSelector(getMyProducts)
+  const isLoading = useSelector(isCreatingProduct)
   const wasLoading = usePrevious(isLoading)
-  const isUpdatingLoading = useSelector(isUpdatingSeller)
-  const wasUpdatingLoading = usePrevious(isLoading)
+  const isUpdatingLoading = useSelector(isUpdatingProduct)
+  const wasUpdatingLoading = usePrevious(isUpdatingLoading)
   const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getProducts())
   }, [dispatch])
 
-  // useEffect(() => {
-  //   if (isCurrent?.name.length) {
-  //     const initialValue = Object.keys(INITIAL_STATE).reduce(
-  //       (obj, item) => Object.assign(obj, { [item]: isCurrent[item] }),
-  //       {}
-  //     )
-  //     setValues(initialValue)
-  //     setProfilePicture({
-  //       url: isCurrent.coverImage,
-  //     })
-  //   }
-  // }, [isCurrent, isCurrent?.name?.length])
+  useEffect(() => {
+    if (previousProducts?.length) {
+      setPreviousValues(previousProducts)
+    }
+  }, [previousProducts, previousProducts?.length])
 
   const onChangePicture = useCallback(
     (event) => {
@@ -62,12 +56,28 @@ const Product = () => {
 
   const onChange = useCallback(
     (event) => {
-      const { value } = event.target
+      const { value, dataset, name } = event.target
       const newValue = [...values]
-      newValue[event.target.dataset.id][event.target.name] = value
+      newValue[dataset.id] = {
+        ...newValue[dataset.id],
+        [name]: value,
+      }
       setValues(newValue)
     },
     [values]
+  )
+
+  const onPreviousChange = useCallback(
+    (event) => {
+      const { value, dataset, name } = event.target
+      const newValue = [...previousValues]
+      newValue[dataset.id] = {
+        ...newValue[dataset.id],
+        [name]: value,
+      }
+      setPreviousValues(newValue)
+    },
+    [previousValues]
   )
 
   const onDeleteClick = useCallback(
@@ -85,6 +95,22 @@ const Product = () => {
     []
   )
 
+  const onDeletePrevious = useCallback(
+    (id) => () => {
+      setValues((prevState) => prevState.filter((file, index) => index !== id))
+      setProfilePicture((prevState) => prevState.filter((file, index) => index !== id))
+    },
+    []
+  )
+
+  const onUpdateClick = useCallback(
+    (id) => () => {
+      setValues((prevState) => prevState.filter((file, index) => index !== id))
+      setProfilePicture((prevState) => prevState.filter((file, index) => index !== id))
+    },
+    []
+  )
+
   const onAddClick = useCallback(() => {
     setValues((prevState) => [...prevState, INITIAL_STATE])
     setProfilePicture((prevState) => [...prevState, { id: '', url: '' }])
@@ -93,27 +119,17 @@ const Product = () => {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault()
-      if (isCurrent?.name.length) {
-        if (profilePicture.id) {
-          dispatch(
-            updateSeller({
-              ...values,
-              profileImage: profilePicture.id,
-            })
-          )
-          return
-        }
-        dispatch(updateSeller(values))
-        return
-      }
-      dispatch(
-        createSeller({
-          ...values,
-          profileImage: profilePicture.id,
-        })
+      values.map((value, index) =>
+        dispatch(
+          createProduct({
+            ...value,
+            price: value.price.replace(',', ''),
+            profileImage: profilePicture[index].id,
+          })
+        )
       )
     },
-    [dispatch, isCurrent?.name?.length, profilePicture.id, values]
+    [dispatch, profilePicture, values]
   )
 
   useEffect(() => {
@@ -141,9 +157,25 @@ const Product = () => {
           em finalizar!
         </Typography>
         <form onSubmit={handleSubmit}>
+          {previousValues.map((value, index) => (
+            <ProductCard
+              id={index}
+              // eslint-disable-next-line react/no-array-index-key
+              key={`products-old-${index}`}
+              values={previousValues}
+              onChange={onPreviousChange}
+              onDeleteProductClick={onDeletePrevious(index)}
+              onUpdateClick={onUpdateClick}
+              profilePicture={profilePicture}
+              isPrevious
+              isLoading={isUpdatingLoading}
+            />
+          ))}
           {values.map((value, index) => (
             <ProductCard
               id={index}
+              // eslint-disable-next-line react/no-array-index-key
+              key={`products-${index}`}
               values={values}
               onChange={onChange}
               onChangePicture={onChangePicture}
@@ -170,7 +202,7 @@ const Product = () => {
               color="primary"
               type="submit"
               className={styles.addButton}
-              disabled={isLoading || !profilePicture?.url || isUpdatingLoading}
+              // disabled={isLoading || !profilePicture?.url || isUpdatingLoading}
             >
               {isLoading || isUpdatingLoading ? <CircularProgress size={24} /> : 'FINALIZAR'}
             </Button>

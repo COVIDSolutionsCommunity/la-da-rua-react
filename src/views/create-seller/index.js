@@ -107,7 +107,7 @@ const CreateSeller = () => {
   const isLoading = useSelector(isCreatingSeller)
   const wasLoading = usePrevious(isLoading)
   const isUpdatingLoading = useSelector(isUpdatingSeller)
-  const wasUpdatingLoading = usePrevious(isLoading)
+  const wasUpdatingLoading = usePrevious(isUpdatingLoading)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -172,13 +172,13 @@ const CreateSeller = () => {
 
   useEffect(() => {
     if (!isLoading && wasLoading) {
-      // navigate('/')
+      navigate('/produto')
     }
   }, [isLoading, navigate, wasLoading])
 
   useEffect(() => {
     if (!isUpdatingLoading && wasUpdatingLoading) {
-      // navigate('/')
+      navigate('/produto')
     }
   }, [isLoading, isUpdatingLoading, navigate, wasLoading, wasUpdatingLoading])
 

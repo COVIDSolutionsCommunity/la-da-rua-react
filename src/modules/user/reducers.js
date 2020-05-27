@@ -4,7 +4,15 @@ import cookies from 'react-cookies'
 
 import { createReducer } from 'utils/redux'
 
-import { REGISTER_USER, LOGIN, CREATE_SELLER, GET_SELLER, UPDATE_SELLER } from './actions'
+import {
+  REGISTER_USER,
+  LOGIN,
+  CREATE_SELLER,
+  GET_SELLER,
+  UPDATE_SELLER,
+  CREATE_PRODUCT,
+  GET_PRODUCTS,
+} from './actions'
 
 const INITIAL_STATE = {
   key: cookies.load('key'),
@@ -31,6 +39,23 @@ const INITIAL_STATE = {
 const setObjectKeys = (previousState, value) =>
   // eslint-disable-next-line no-return-assign
   Object.keys(value).map((key) => (previousState[key] = value[key]))
+
+export const getPage = (query) =>
+  query.includes('?page=') || query.includes('&page=')
+    ? Number(query.match(/[?&]page=([^&#]*)/)[1])
+    : undefined
+
+const getProductPage = (page) => (page ? getPage(page) : undefined)
+
+const returnNewProducts = (previousState, payload) => {
+  const products = payload.results
+
+  const newProducts = payload.next ? [...previousState.seller.products, products] : products
+
+  previousState.seller.products = newProducts
+  previousState.seller.next = getProductPage(payload.new)
+  previousState.seller.previous = payload.previous
+}
 
 const user = createReducer(INITIAL_STATE, {
   [REGISTER_USER.FULFILLED]: (state, { payload }) => {
@@ -66,6 +91,16 @@ const user = createReducer(INITIAL_STATE, {
       const { user, ...values } = payload
       setObjectKeys(previousState, payload.user)
       setObjectKeys(previousState.seller, values)
+    })
+  },
+  [CREATE_PRODUCT.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      previousState.seller.products = [...previousState.seller.products, payload]
+    })
+  },
+  [GET_PRODUCTS.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      returnNewProducts(previousState, payload)
     })
   },
 })

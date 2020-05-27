@@ -127,7 +127,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (!isLoading && wasLoading) {
-      navigate('/')
+      navigate('/sobre-seu-negocio')
     }
   }, [isLoading, navigate, wasLoading])
 

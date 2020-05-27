@@ -73,25 +73,27 @@ const Login = () => {
 
   useEffect(() => {
     if (!isLoading && wasLoading && Object.keys(error).length < 1) {
-      navigate('/')
+      navigate('/sobre-seu-negocio')
     }
   }, [error, isLoading, navigate, wasLoading])
 
   return (
     <Grid item className={styles.header} container alignItems="center" direction="row">
       <Grid className={styles.section} item>
-        <Typography color="primary" className={styles.title} component="h1" variant="h1">
-          FAÇA LOGIN
-        </Typography>
-        <Typography className={styles.text} color="primary" component="h2" variant="h2">
-          Ei, Microempreendedor de Fortaleza! Está precisando de uma ajudinha com as vendas e ainda
-          que fazer parte de uma rede que está ativamente ajudando no combate ao COVID-19? Com o seu
-          cadastro, será possível atualizar as suas informações!{' '}
-          <Link component={RouterLink} to="/cadastre-se">
-            Para se cadastrar, clique aqui
-          </Link>
-        </Typography>
-        <form onSubmit={handleSubmit}>
+        <Grid item className={styles.sectionHeader}>
+          <Typography color="primary" className={styles.title} component="h1" variant="h1">
+            FAÇA LOGIN
+          </Typography>
+          <Typography className={styles.text} color="primary" component="h2" variant="h2">
+            Ei, Microempreendedor de Fortaleza! Está precisando de uma ajudinha com as vendas e
+            ainda que fazer parte de uma rede que está ativamente ajudando no combate ao COVID-19?
+            Com o seu cadastro, será possível atualizar as suas informações!{' '}
+            <Link component={RouterLink} to="/cadastre-se">
+              Para se cadastrar, clique aqui
+            </Link>
+          </Typography>
+        </Grid>
+        <form className={styles.inputs} onSubmit={handleSubmit}>
           <Grid item container direction="column" spacing={2} className={styles.inputs}>
             {fields.map((field) => {
               const { name, label, value, ...otherProps } = field
