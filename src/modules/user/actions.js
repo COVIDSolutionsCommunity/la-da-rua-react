@@ -13,6 +13,7 @@ export const UPDATE_SELLER = defineAction('UPDATE_SELLER', REQUEST)
 export const GET_PRODUCTS = defineAction('GET_PRODUCTS', REQUEST)
 export const CREATE_PRODUCT = defineAction('CREATE_PRODUCT', REQUEST)
 export const UPDATE_PRODUCT = defineAction('UPDATE_PRODUCT', REQUEST)
+export const DELETE_PRODUCT = defineAction('DELETE_PRODUCT', REQUEST)
 
 export const registerUser = (payload) => (dispatch) => {
   return dispatch({
@@ -60,6 +61,9 @@ export const updateProduct = (payload) => (dispatch, getState) => {
   return dispatch({
     type: UPDATE_PRODUCT.ACTION,
     payload: userService.updateProduct(payload, getState().user.key),
+    meta: {
+      id: payload.id,
+    },
   })
 }
 
@@ -67,5 +71,15 @@ export const getProducts = () => (dispatch, getState) => {
   return dispatch({
     type: GET_PRODUCTS.ACTION,
     payload: userService.getProducts(getState().user.key),
+  })
+}
+
+export const deleteProduct = (payload) => (dispatch, getState) => {
+  return dispatch({
+    type: DELETE_PRODUCT.ACTION,
+    payload: userService.deleteProduct(payload, getState().user.key),
+    meta: {
+      id: payload.id,
+    },
   })
 }

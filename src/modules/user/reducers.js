@@ -12,6 +12,7 @@ import {
   UPDATE_SELLER,
   CREATE_PRODUCT,
   GET_PRODUCTS,
+  UPDATE_PRODUCT,
 } from './actions'
 
 const INITIAL_STATE = {
@@ -101,6 +102,15 @@ const user = createReducer(INITIAL_STATE, {
   [GET_PRODUCTS.FULFILLED]: (state, { payload }) => {
     return produce(state, (previousState) => {
       returnNewProducts(previousState, payload)
+    })
+  },
+  [UPDATE_PRODUCT.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      const { id } = payload
+      const newValues = previousState.seller.products.map((value) =>
+        value.id === id ? payload : value
+      )
+      previousState.seller.products = newValues
     })
   },
 })

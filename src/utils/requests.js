@@ -79,11 +79,10 @@ export const patch = (key) => (endpoint, payload, applyHumps = true) =>
     .then(({ data }) => humps.camelizeKeys(data))
     .catch(handleResponseError)
 
-export const del = (key) => (endpoint, payload, applyHumps = true) =>
+export const del = (key) => (endpoint) =>
   axios
     .delete(
       api.concat(endpoint),
-      applyHumps ? humps.decamelizeKeys(payload) : payload,
       key && {
         headers: {
           Authorization: `Token ${key}`,

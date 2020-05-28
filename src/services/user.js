@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 import humps from 'humps'
 
-import { get, post, patch, createFormData } from 'utils/requests'
+import { get, post, patch, del, createFormData } from 'utils/requests'
 
 export const registerUser = (payload) => {
   const newPayload = humps.decamelizeKeys(payload)
@@ -58,5 +58,9 @@ export const updateProduct = (payload, key) => {
       false
     )
   }
-  return patch(key)('my-products/', payload)
+  return patch(key)(`my-products/${payload.id}/`, payload)
+}
+
+export const deleteProduct = (payload, key) => {
+  return del(key)(`my-products/${payload.id}/`)
 }

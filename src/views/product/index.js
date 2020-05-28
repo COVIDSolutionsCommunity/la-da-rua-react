@@ -6,8 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useNavigate } from '@reach/router'
 
-import { createProduct, getProducts } from 'modules/user/actions'
-import { isCreatingProduct, getMyProducts, isUpdatingProduct } from 'modules/user/selectors'
+import { createProduct, getProducts, deleteProduct, updateProduct } from 'modules/user/actions'
+import {
+  isCreatingProduct,
+  getMyProducts,
+  isUpdatingProduct,
+  createError,
+} from 'modules/user/selectors'
 import { usePrevious, useRedirect } from 'utils/hooks'
 
 import useStyles from './styles'
@@ -27,6 +32,7 @@ const Product = () => {
   const [previousValues, setPreviousValues] = useState([])
   const [profilePicture, setProfilePicture] = useState([{ id: '', url: '' }])
   const previousProducts = useSelector(getMyProducts)
+  const error = useSelector(createError)
   const isLoading = useSelector(isCreatingProduct)
   const wasLoading = usePrevious(isLoading)
   const isUpdatingLoading = useSelector(isUpdatingProduct)
@@ -82,9 +88,20 @@ const Product = () => {
 
   const onDeleteClick = useCallback(
     (id) => () => {
-      setProfilePicture((prevState) => prevState.filter((file, index) => index !== id))
+      const newValue = [...profilePicture]
+      newValue[id].id = ''
+      newValue[id].url = ''
+      setProfilePicture(newValue)
     },
-    []
+    [profilePicture]
+  )
+
+  const onDeletePrevious = useCallback(
+    (id) => () => {
+      dispatch(deleteProduct({ id }))
+      setPreviousValues((prevState) => prevState.filter((file) => file.id !== id))
+    },
+    [dispatch]
   )
 
   const onDeleteProductClick = useCallback(
@@ -95,20 +112,13 @@ const Product = () => {
     []
   )
 
-  const onDeletePrevious = useCallback(
-    (id) => () => {
-      setValues((prevState) => prevState.filter((file, index) => index !== id))
-      setProfilePicture((prevState) => prevState.filter((file, index) => index !== id))
-    },
-    []
-  )
-
   const onUpdateClick = useCallback(
     (id) => () => {
-      setValues((prevState) => prevState.filter((file, index) => index !== id))
-      setProfilePicture((prevState) => prevState.filter((file, index) => index !== id))
+      const payload = previousValues.find((value) => value.id === id)
+      const { image, ...value } = payload
+      dispatch(updateProduct(value))
     },
-    []
+    [dispatch, previousValues]
   )
 
   const onAddClick = useCallback(() => {
@@ -134,13 +144,13 @@ const Product = () => {
 
   useEffect(() => {
     if (!isLoading && wasLoading) {
-      // navigate('/')
+      navigate('/obrigada')
     }
   }, [isLoading, navigate, wasLoading])
 
   useEffect(() => {
     if (!isUpdatingLoading && wasUpdatingLoading) {
-      // navigate('/')
+      navigate('/obrigada')
     }
   }, [isLoading, isUpdatingLoading, navigate, wasLoading, wasUpdatingLoading])
 
@@ -160,12 +170,11 @@ const Product = () => {
           {previousValues.map((value, index) => (
             <ProductCard
               id={index}
-              // eslint-disable-next-line react/no-array-index-key
-              key={`products-old-${index}`}
+              key={`products-old-${value.id}`}
               values={previousValues}
               onChange={onPreviousChange}
-              onDeleteProductClick={onDeletePrevious(index)}
-              onUpdateClick={onUpdateClick}
+              onDeleteProductClick={onDeletePrevious(value.id)}
+              onUpdateClick={onUpdateClick(value.id)}
               profilePicture={profilePicture}
               isPrevious
               isLoading={isUpdatingLoading}
@@ -184,25 +193,27 @@ const Product = () => {
               profilePicture={profilePicture}
             />
           ))}
+          {error?.length && (
+            <Typography className={styles.text} color="primary" component="h2" variant="h2">
+              Certifique-se se todos os produtos tem uma imagem nítida.
+            </Typography>
+          )}
           <Grid item container justify="flex-end">
             <Button
               variant="outlined"
               color="primary"
               className={styles.addButton}
               onClick={onAddClick}
+              disabled={isLoading}
             >
-              {isLoading || isUpdatingLoading ? (
-                <CircularProgress size={24} />
-              ) : (
-                'ADICIONAR OUTRO PRODUTO'
-              )}
+              ADICIONAR OUTRO PRODUTO
             </Button>
             <Button
               variant="outlined"
               color="primary"
               type="submit"
               className={styles.addButton}
-              // disabled={isLoading || !profilePicture?.url || isUpdatingLoading}
+              disabled={isLoading || isUpdatingLoading}
             >
               {isLoading || isUpdatingLoading ? <CircularProgress size={24} /> : 'FINALIZAR'}
             </Button>
