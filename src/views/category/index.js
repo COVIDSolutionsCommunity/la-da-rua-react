@@ -25,22 +25,28 @@ const Category = () => {
       direction="row"
     >
       <TextField
-        variant="outlined"
+        variant="filled"
         placeholder="Procure uma loja"
+        label="Buscar"
         multiline
         value={values}
         onChange={onChange}
+        className={styles.input}
         fullWidth
-        startAdornment={
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        }
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon className={styles.icon} />
+            </InputAdornment>
+          ),
+        }}
       />
-      <Grid container>
-        <Grid item cs={6}>
-          <MainCard />
-        </Grid>
+      <Grid className={styles.cards}>
+        <MainCard />
+        <MainCard />
+        <MainCard />
+        <MainCard />
+        <MainCard />
       </Grid>
     </Grid>
   )

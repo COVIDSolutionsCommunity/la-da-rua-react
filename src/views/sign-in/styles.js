@@ -20,7 +20,7 @@ export default makeStyles((theme) => ({
     width: '100%',
 
     [theme.breakpoints.down('md')]: {
-      padding: '50px 30px',
+      padding: '90px 30px',
       width: '100%',
     },
   },

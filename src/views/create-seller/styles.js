@@ -19,7 +19,7 @@ export default makeStyles((theme) => ({
     height: '100%',
 
     [theme.breakpoints.down('sm')]: {
-      padding: '30px 20px 150px',
+      padding: '60px 20px 150px',
       width: '100%',
     },
   },

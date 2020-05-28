@@ -55,19 +55,11 @@ const App = ({ children }) => {
               Parcerias
             </Button>
             {isLogged ? (
-              <Button
-                component={Link}
-                className={classnames(styles.link, styles.show)}
-                onClick={onLogoutClick}
-              >
+              <Button component={Link} className={styles.link} onClick={onLogoutClick}>
                 LOG OUT
               </Button>
             ) : (
-              <Button
-                component={RouterLink}
-                className={classnames(styles.link, styles.show)}
-                to="/cadastre-se"
-              >
+              <Button component={RouterLink} className={styles.link} to="/cadastre-se">
                 Cadastre-se
               </Button>
             )}

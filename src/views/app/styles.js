@@ -27,9 +27,18 @@ export default makeStyles((theme) => ({
     fontSize: 24,
     fontWeight: '500',
     margin: '0 16px',
+
+    [theme.breakpoints.down('md')]: {
+      fontSize: 18,
+      margin: '0 8px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 14,
+      margin: '0 4px',
+    },
     [theme.breakpoints.down('xs')]: {
       fontSize: 12,
-      margin: '0 8px',
+      margin: '0 4px',
     },
   },
   logo: {
@@ -44,6 +53,7 @@ export default makeStyles((theme) => ({
   footer: {
     height: '60px',
     alignSelf: 'end',
+    marginTop: '16px',
 
     [theme.breakpoints.down('md')]: {
       height: '40px',
