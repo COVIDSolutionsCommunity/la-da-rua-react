@@ -34,11 +34,11 @@ export default makeStyles((theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: 14,
-      margin: '0 4px',
+      margin: '0',
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: 12,
-      margin: '0 4px',
+      margin: '0',
     },
   },
   logo: {
