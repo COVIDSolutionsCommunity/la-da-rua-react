@@ -31,42 +31,36 @@ const ProductCard = ({
     <Grid className={styles.card}>
       <Grid item container direction="row" spacing={2} className={styles.inputs}>
         <Grid xs={4} spacing={2} direction="column" container item>
-          <Grid item>
-            {isPrevious
-              ? values[id].image
-              : profilePicture[id].url && (
-                  <Grid item container className={styles.imageCard} direction="row">
-                    {isPrevious ? (
-                      <img
-                        className={styles.img}
-                        alt="Imagem do produto"
-                        src="https://ladarua-test.s3.amazonaws.com/products/5a03adcd-73a5-4290-b4e2-b64658d71452-image-2020-05-27T214037.3241630000.jpeg"
-                      />
-                    ) : (
-                      <img
-                        className={styles.img}
-                        alt="Imagem do produto"
-                        src={profilePicture[id].url}
-                      />
-                    )}
-                    <Grid container>
-                      {!isPrevious && (
-                        <IconButton onClick={onDeleteClick} className={styles.buttonIcon}>
-                          <DeleteIcon color="primary" />
-                        </IconButton>
-                      )}
-                      <Link
-                        className={styles.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        href={profilePicture.url}
-                      >
-                        Imagem do seu produto
-                      </Link>
-                    </Grid>
-                  </Grid>
+          {(isPrevious || profilePicture[id].url.length > 1) && (
+            <Grid item>
+              <Grid item container className={styles.imageCard} direction="row">
+                {isPrevious ? (
+                  <img className={styles.img} alt="Imagem do produto" src={values[id].image} />
+                ) : (
+                  <img
+                    className={styles.img}
+                    alt="Imagem do produto"
+                    src={profilePicture[id].url}
+                  />
                 )}
-          </Grid>
+                <Grid container>
+                  {!isPrevious && (
+                    <IconButton onClick={onDeleteClick} className={styles.buttonIcon}>
+                      <DeleteIcon color="primary" />
+                    </IconButton>
+                  )}
+                  <Link
+                    className={styles.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    href={profilePicture.url}
+                  >
+                    Imagem do seu produto
+                  </Link>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
           {!isPrevious && (
             <Grid item>
               <label htmlFor={`icon-button-file-${id}`} className={styles.fullWidth}>

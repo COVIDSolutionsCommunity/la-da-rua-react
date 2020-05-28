@@ -21,4 +21,5 @@ export const isUpdatingProduct = ({ loading }) => !!loading[UPDATE_PRODUCT.ACTIO
 export const updateProductError = ({ error }) => error[UPDATE_PRODUCT.ACTION]
 
 export const getMySeller = (state) => state.user.seller
+export const isLoggedIn = (state) => state.user.key
 export const getMyProducts = (state) => state.user.seller.products

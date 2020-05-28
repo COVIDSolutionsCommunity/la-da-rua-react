@@ -35,6 +35,7 @@ export default makeStyles((theme) => ({
     fontFamily: 'Roboto',
     fontSize: 16,
     color: theme.palette.primary.main,
+    margin: 'auto',
   },
   buttonIcon: {
     marginRight: theme.spacing(2),

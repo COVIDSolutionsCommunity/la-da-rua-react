@@ -13,6 +13,7 @@ import {
   CREATE_PRODUCT,
   GET_PRODUCTS,
   UPDATE_PRODUCT,
+  LOGOUT,
 } from './actions'
 
 const INITIAL_STATE = {
@@ -111,6 +112,12 @@ const user = createReducer(INITIAL_STATE, {
         value.id === id ? payload : value
       )
       previousState.seller.products = newValues
+    })
+  },
+  [LOGOUT]: (state) => {
+    return produce(state, (previousState) => {
+      cookies.remove('key')
+      previousState.key = ''
     })
   },
 })

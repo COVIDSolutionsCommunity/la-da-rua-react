@@ -5,21 +5,20 @@ export default makeStyles((theme) => ({
     backgroundImage:
       'url(https://uploaddeimagens.com.br/images/002/655/312/original/Desktop_-_1_%281%29.png?1589725718)',
     backgroundSize: 'cover',
-    height: 'auto',
-    paddingBottom: '32px',
-    overflowX: 'hidden',
+    position: 'fixed',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    overflowY: 'auto',
   },
   header: {
     backgroundColor: 'rgba(0,0,0, 0,5)',
+    maxHeight: 64,
   },
-  content: {
-    marginTop: 80,
-    height: '100%',
-
-    [theme.breakpoints.down('md')]: {
-      height: '100%',
-    },
-  },
+  // content: {
+  //   marginTop: 80,
+  // },
   link: {
     fontFamily: 'Oswald',
     textDecoration: 'none',
@@ -28,23 +27,31 @@ export default makeStyles((theme) => ({
     fontSize: 24,
     fontWeight: '500',
     margin: '0 16px',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: 12,
+      margin: '0 8px',
     },
   },
   logo: {
+    height: 35,
+  },
+  logo2: {
     height: 35,
   },
   show: {
     display: 'block',
   },
   footer: {
-    height: '70%',
-    margin: '0 auto 10px',
+    height: '60px',
+    alignSelf: 'end',
+
+    [theme.breakpoints.down('md')]: {
+      height: '40px',
+    },
   },
   img: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
+    [theme.breakpoints.down('md')]: {
+      height: '40px',
     },
   },
 }))

@@ -20,6 +20,7 @@ import Login from 'views/log-in'
 import CreateSeller from 'views/create-seller'
 import Product from 'views/product'
 import ThankYou from 'views/thank-you'
+import Category from 'views/category'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -163,6 +164,7 @@ ReactDOM.render(
           <CreateSeller path="/sobre-seu-negocio" />
           <Product path="/produto" />
           <ThankYou path="/obrigada" />
+          <Category path="/category" />
         </App>
       </Router>
     </ThemeProvider>

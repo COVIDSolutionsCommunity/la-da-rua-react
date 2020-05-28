@@ -14,6 +14,7 @@ export const GET_PRODUCTS = defineAction('GET_PRODUCTS', REQUEST)
 export const CREATE_PRODUCT = defineAction('CREATE_PRODUCT', REQUEST)
 export const UPDATE_PRODUCT = defineAction('UPDATE_PRODUCT', REQUEST)
 export const DELETE_PRODUCT = defineAction('DELETE_PRODUCT', REQUEST)
+export const LOGOUT = 'LOGOUT'
 
 export const registerUser = (payload) => (dispatch) => {
   return dispatch({
@@ -81,5 +82,11 @@ export const deleteProduct = (payload) => (dispatch, getState) => {
     meta: {
       id: payload.id,
     },
+  })
+}
+
+export const logout = () => (dispatch) => {
+  return dispatch({
+    type: LOGOUT,
   })
 }

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
   header: {
-    marginTop: '-80px',
+    marginTop: '-150px',
     paddingBottom: theme.spacing(3),
     height: '100%',
     boxSizing: 'border-box',

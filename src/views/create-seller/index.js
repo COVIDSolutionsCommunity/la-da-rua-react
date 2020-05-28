@@ -16,7 +16,8 @@ import { useNavigate } from '@reach/router'
 
 import { createSeller, getSeller, updateSeller } from 'modules/user/actions'
 import { isCreatingSeller, getMySeller, isUpdatingSeller } from 'modules/user/selectors'
-import { usePrevious, useRedirect } from 'utils/hooks'
+import { usePrevious } from 'utils/hooks'
+import authRoute from 'utils/hoc'
 import GeneralInput from 'components/general-input'
 
 import useStyles from './styles'
@@ -182,8 +183,6 @@ const CreateSeller = () => {
     }
   }, [isLoading, isUpdatingLoading, navigate, wasLoading, wasUpdatingLoading])
 
-  useRedirect()
-
   return (
     <Grid item className={styles.header} container alignItems="center" direction="row">
       <Grid className={styles.section} item>
@@ -321,4 +320,4 @@ const CreateSeller = () => {
   )
 }
 
-export default React.memo(CreateSeller)
+export default React.memo(authRoute(CreateSeller))

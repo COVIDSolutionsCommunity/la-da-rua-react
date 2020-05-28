@@ -38,7 +38,7 @@ const LandingPage = () => {
   const styles = useStyles()
 
   return (
-    <Grid item container alignItems="center" className={styles.container} spacing={4}>
+    <Grid item container alignItems="center" justify="center" className={styles.container}>
       <Grid item container justify="center" alignItems="center">
         <img className={styles.logo} alt="logo" src={colagem} />
         <img alt="Lá da rua" src={logo} className={styles.mainLogo} />

@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles'
 export default makeStyles((theme) => ({
   header: {
     marginTop: '-80px',
-    paddingBottom: theme.spacing(3),
     height: '90vh',
     boxSizing: 'border-box',
   },
@@ -18,7 +17,7 @@ export default makeStyles((theme) => ({
     boxSizing: 'border-box',
     backgroundColor: 'rgba(12,12,12,0.75)',
     height: '100%',
-    width: '100vw',
+    width: '100%',
 
     [theme.breakpoints.down('sm')]: {
       padding: '65px 30px 100px 30px',

@@ -23,13 +23,13 @@ export default makeStyles((theme) => ({
     gridTemplateColumns: 'repeat(4, auto)',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: '0 auto',
+    marginTop: 32,
 
-    [theme.breakpoints.down('sm')]: {
-      gridTemplateColumns: '1fr',
-      gridTemplateRows: 'repeat(4, auto)',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+    // [theme.breakpoints.down('sm')]: {
+    //   gridTemplateColumns: '1fr',
+    //   gridTemplateRows: 'repeat(4, auto)',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    // },
   },
 }))

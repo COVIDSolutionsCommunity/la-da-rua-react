@@ -13,7 +13,8 @@ import {
   isUpdatingProduct,
   createError,
 } from 'modules/user/selectors'
-import { usePrevious, useRedirect } from 'utils/hooks'
+import { usePrevious } from 'utils/hooks'
+import authRoute from 'utils/hoc'
 
 import useStyles from './styles'
 import ProductCard from './product-card'
@@ -154,7 +155,6 @@ const Product = () => {
     }
   }, [isLoading, isUpdatingLoading, navigate, wasLoading, wasUpdatingLoading])
 
-  useRedirect()
   return (
     <Grid item className={styles.header} container alignItems="center" direction="row">
       <Grid className={styles.section} item>
@@ -224,4 +224,4 @@ const Product = () => {
   )
 }
 
-export default React.memo(Product)
+export default React.memo(authRoute(Product))

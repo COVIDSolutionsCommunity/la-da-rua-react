@@ -10,7 +10,6 @@ export default makeStyles((theme) => ({
 
     [theme.breakpoints.down('sm')]: {
       width: '100%',
-      height: '100px',
       objectFit: 'cover',
     },
   },
@@ -23,8 +22,6 @@ export default makeStyles((theme) => ({
 
     [theme.breakpoints.down('sm')]: {
       width: '100%',
-      height: '110px',
-      objectFit: 'cover',
     },
   },
   button: {
@@ -38,6 +35,10 @@ export default makeStyles((theme) => ({
     textAlign: 'center',
     boxSizing: 'border-box',
     fontSize: 32,
+
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 16,
+    },
   },
   pink: {
     backgroundColor: '#DC8474',
