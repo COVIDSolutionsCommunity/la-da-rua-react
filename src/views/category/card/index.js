@@ -16,6 +16,7 @@ import { Link as RouterLink } from '@reach/router'
 import Link from '@material-ui/core/Link'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PlaceIcon from '@material-ui/icons/Place'
+import PropTypes from 'prop-types'
 
 import placeholder from 'assets/comida.png'
 
@@ -68,25 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const seller = {
-  slug: 'marina-silva-tavares',
-  name: 'Marina Silva Tavares',
-  description:
-    'DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA DESCRIÇÃO DA LOJA',
-  category: 'food',
-  user: {
-    firstName: 'Marina',
-    lastName: 'Silva Tavares',
-    gender: 'female',
-    description: 'descrição da marina',
-    profileImage:
-      'https://ladarua-test.s3.amazonaws.com/users/b859476a-858a-4ce0-9a1c-1d55b52e2b1b-cover-2020-05-21T200647.8606980000.png',
-  },
-  coverImage:
-    'https://ladarua-test.s3.amazonaws.com/sellers/b255a5e4-52ce-4118-a945-a21c69154625-cover-2020-05-28T173228.5063700000.jpeg',
-}
-
-const MainCard = () => {
+const MainCard = ({ seller }) => {
   const styles = useStyles()
   const [isPictureLoading, setLoadingImage] = useState(true)
 
@@ -98,11 +81,7 @@ const MainCard = () => {
 
   return (
     <Card className={styles.root}>
-      <CardActionArea
-      // component={RouterLink}
-      // to={`/${client.instagramProfile}`}
-      // state={{ state: client.state, city: client.city }}
-      >
+      <CardActionArea component={RouterLink} to={`/loja/${seller.slug}`}>
         {seller.coverImage ? (
           <CardMedia
             component="img"
@@ -135,7 +114,7 @@ const MainCard = () => {
                 className={styles.obs}
               >
                 <Typography className={styles.description} variant="h5" component="h2">
-                  {seller.description}
+                  {seller.user.description}
                 </Typography>
               </Grid>
             )}
@@ -150,6 +129,22 @@ const MainCard = () => {
       </Grid>
     </Card>
   )
+}
+
+MainCard.propTypes = {
+  seller: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      profileImage: PropTypes.string.isRequired,
+    }).isRequired,
+    coverImage: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 export default React.memo(MainCard)

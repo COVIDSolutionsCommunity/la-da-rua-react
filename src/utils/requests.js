@@ -37,7 +37,7 @@ export const createFormData = (data) => {
   return formData
 }
 
-export const get = (key = null) => (endpoint) =>
+export const get = (key = null) => (endpoint, params = null) =>
   axios
     .get(
       api.concat(endpoint),
@@ -45,7 +45,8 @@ export const get = (key = null) => (endpoint) =>
         headers: {
           Authorization: `Token ${key}`,
         },
-      }
+      },
+      params
     )
     .then(({ data }) => humps.camelizeKeys(data))
     .catch(handleResponseError)

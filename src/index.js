@@ -21,6 +21,7 @@ import CreateSeller from 'views/create-seller'
 import Product from 'views/product'
 import ThankYou from 'views/thank-you'
 import Category from 'views/category'
+import Seller from 'views/seller'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -65,13 +66,20 @@ const theme = createMuiTheme({
       lineHeight: 1.5,
     },
     h3: {
-      fontSize: '14px',
+      fontSize: '24px',
       lineHeight: '1.5',
       textAlign: 'justify',
+      fontFamily: 'Oswald',
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
     },
     h4: {
-      fontSize: '14px',
-      fontWeight: 'bold',
+      fontSize: '20px',
+      lineHeight: '1.5',
+      textAlign: 'justify',
+      fontFamily: 'Oswald',
+      fontWeight: '100',
+      textTransform: 'uppercase',
     },
     h5: {
       fontSize: '12px',
@@ -164,7 +172,8 @@ ReactDOM.render(
           <CreateSeller path="/sobre-seu-negocio" />
           <Product path="/produto" />
           <ThankYou path="/obrigada" />
-          <Category path="/category" />
+          <Category path="/:category" />
+          <Seller path="/loja/:slug" />
         </App>
       </Router>
     </ThemeProvider>
