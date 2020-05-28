@@ -4,7 +4,14 @@ export default makeStyles((theme) => ({
   view: {
     display: 'grid',
     gridTemplateColumns: '1fr 2fr',
+    gridTemplateRows: 'auto',
     gridGap: '50px',
+    padding: theme.spacing(4),
+
+    [theme.breakpoints.down('md')]: {
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: 'auto auto',
+    },
   },
   name: {
     padding: '12px',
@@ -33,12 +40,14 @@ export default makeStyles((theme) => ({
   img: {
     height: '200px',
     width: '200px',
+    margin: 8,
     position: 'relative',
     backgroundColor: theme.palette.secondary.main,
   },
   product: {
     height: '200px',
     width: '200px',
+    margin: 8,
 
     '&:hover': {
       opacity: 0.15,
@@ -51,6 +60,7 @@ export default makeStyles((theme) => ({
     top: 10,
     left: 15,
     zIndex: 2,
+    margin: 8,
   },
   productDescription: {
     position: 'absolute',
