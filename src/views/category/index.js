@@ -6,9 +6,11 @@ import SearchIcon from '@material-ui/icons/Search'
 import { useParams } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Typography from '@material-ui/core/Typography'
 
-import { getSellersCategory } from 'modules/sellers/actions'
+import { getSellersCategory, getSellersSearch } from 'modules/sellers/actions'
 import { getSellers, isRegisterLoading } from 'modules/sellers/selectors'
+import { useDebounce } from 'utils/hooks'
 
 import MainCard from './card'
 import useStyles from './styles'
@@ -20,6 +22,7 @@ const Category = () => {
   const dispatch = useDispatch()
   const sellers = useSelector(getSellers)
   const isLoading = useSelector(isRegisterLoading)
+  const debounced = useDebounce(values, 500)
 
   const onChange = useCallback((event) => {
     setValues(event.target.value)
@@ -28,6 +31,12 @@ const Category = () => {
   useEffect(() => {
     dispatch(getSellersCategory(category))
   }, [category, dispatch])
+
+  useEffect(() => {
+    if (debounced) {
+      dispatch(getSellersSearch(category, debounced))
+    }
+  }, [category, debounced, dispatch])
 
   if (!sellers) return null
   return (
@@ -60,11 +69,18 @@ const Category = () => {
               ),
             }}
           />
-          <Grid className={styles.cards}>
-            {sellers?.map((seller) => (
-              <MainCard key={seller.id} seller={seller} />
-            ))}
-          </Grid>
+          {sellers.length > 0 ? (
+            <Grid className={styles.cards}>
+              {sellers?.map((seller) => (
+                <MainCard key={seller.id} seller={seller} />
+              ))}
+            </Grid>
+          ) : (
+            <Typography className={styles.center} color="primary" variant="h1" component="h1">
+              {' '}
+              Não encontramos nenhum vendedor com os dados oferecidos{' '}
+            </Typography>
+          )}
         </>
       )}
     </Grid>

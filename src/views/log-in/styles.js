@@ -14,13 +14,13 @@ export default makeStyles((theme) => ({
     },
   },
   section: {
-    padding: '65px 45px 100px 150px',
+    padding: '165px 45px 200px 150px',
     boxSizing: 'border-box',
     backgroundColor: 'rgba(12,12,12,0.75)',
     height: '100%',
 
     [theme.breakpoints.down('sm')]: {
-      padding: '65px 30px 100px 30px',
+      padding: '165px 30px 150px 30px',
       width: '100%',
     },
   },

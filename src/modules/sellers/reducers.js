@@ -3,11 +3,12 @@ import produce from 'immer'
 
 import { createReducer } from 'utils/redux'
 
-import { GET_SELLERS_CATEGORY } from './actions'
+import { GET_SELLERS_CATEGORY, GET_SELLERS_SEARCH, GET_CURRENT_SELLER } from './actions'
 
 const INITIAL_STATE = {
   result: '',
   next: '',
+  currentSeller: {},
 }
 
 export const getPage = (query) =>
@@ -31,6 +32,16 @@ const sellers = createReducer(INITIAL_STATE, {
   [GET_SELLERS_CATEGORY.FULFILLED]: (state, { payload }) => {
     return produce(state, (previousState) => {
       returnNewProducts(previousState, payload)
+    })
+  },
+  [GET_SELLERS_SEARCH.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      returnNewProducts(previousState, payload)
+    })
+  },
+  [GET_CURRENT_SELLER.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      previousState.currentSeller = payload
     })
   },
 })

@@ -2,13 +2,23 @@
 /* eslint-disable no-param-reassign */
 
 import { get } from 'utils/requests'
+import { CATEGORIES_NAMES } from 'utils/constants'
 
 export const getSellers = () => get()('sellers/')
 
 export const getSellersCategory = (category) =>
-  get()('sellers/', {
+  get()(`sellers/?category=${CATEGORIES_NAMES[category]}`, {
     params: {
       category,
+      page_size: 50,
+    },
+  })
+
+export const getSellersSearch = (category, name) =>
+  get()(`sellers/?category=${CATEGORIES_NAMES[category]}$name=${name}`, {
+    params: {
+      category,
+      name,
       page_size: 50,
     },
   })

@@ -25,4 +25,7 @@ export default makeStyles((theme) => ({
   icon: {
     marginBottom: '10px',
   },
+  center: {
+    textAlign: 'center',
+  },
 }))

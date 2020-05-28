@@ -9,7 +9,7 @@ import useStyles from './styles'
 const SectionButton = ({ label, img, color }) => {
   const styles = useStyles()
   return (
-    <Link to={`/${label}`} className={styles.section}>
+    <Link to={`/${label === 'decoração' ? 'decoracao' : label}`} className={styles.section}>
       <img alt="Seção da comida" aria-hidden="true" className={styles.img} src={img} />
       <Typography className={classnames(styles.button, styles[color])} component="h1" variant="h2">
         {label}

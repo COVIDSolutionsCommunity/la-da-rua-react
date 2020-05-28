@@ -1,45 +1,28 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import classnames from 'classnames'
 import { useParams } from '@reach/router'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { CATEGORIES_COLORS } from 'utils/constants'
+import { getSeller } from 'modules/sellers/actions'
+import { currentSeller } from 'modules/sellers/selectors'
 
 import useStyles from './styles'
-
-const seller = {
-  slug: 'marina-silva-tavares',
-  name: 'Marina Silva Tavares',
-  description: 'hauhau',
-  category: 'food',
-  user: {
-    firstName: 'Marina',
-    lastName: 'Silva Tavares',
-    gender: 'female',
-    description: 'descrição da marina',
-    profileImage:
-      'https://ladarua-test.s3.amazonaws.com/users/b859476a-858a-4ce0-9a1c-1d55b52e2b1b-cover-2020-05-21T200647.8606980000.png',
-  },
-  coverImage:
-    'https://ladarua-test.s3.amazonaws.com/sellers/b255a5e4-52ce-4118-a945-a21c69154625-cover-2020-05-28T173228.5063700000.jpeg',
-  products: [
-    {
-      id: 10,
-      name: 'marinhauhauauhauhaha',
-      description: 'ahuagauaugauaauhauha ahauuauhau hauahuah hauahuahahauaua hauauhauha aa',
-      price: 1121.0,
-      image:
-        'https://ladarua-test.s3.amazonaws.com/products/afb5d2f9-f303-4aca-9597-70e1a7907959-image-2020-05-28T173244.8649720000.jpeg',
-    },
-  ],
-}
 
 const Seller = () => {
   const styles = useStyles()
   const { slug } = useParams()
+  const dispatch = useDispatch()
+  const seller = useSelector(currentSeller)
 
+  useEffect(() => {
+    dispatch(getSeller(slug))
+  }, [dispatch, slug])
+
+  if (!seller?.name) return null
   return (
     <Grid className={styles.view}>
       <Grid item container alignItems="center" direction="column">

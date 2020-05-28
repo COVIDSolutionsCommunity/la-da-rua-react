@@ -6,10 +6,10 @@ export const CATEGORIES_TYPES = {
 }
 
 export const CATEGORIES_NAMES = {
-  [CATEGORIES_TYPES.FOOD]: 'Comida',
-  [CATEGORIES_TYPES.CLOTHING]: 'Vestimenta',
-  [CATEGORIES_TYPES.DECORATION]: 'Decoração',
-  [CATEGORIES_TYPES.MISC]: 'Variedades',
+  comida: [CATEGORIES_TYPES.FOOD],
+  vestimenta: [CATEGORIES_TYPES.CLOTHING],
+  decoracao: [CATEGORIES_TYPES.DECORATION],
+  variedades: [CATEGORIES_TYPES.MISC],
 }
 
 export const CATEGORIES_COLORS = {
