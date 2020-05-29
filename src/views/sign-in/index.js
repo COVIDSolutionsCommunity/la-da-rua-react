@@ -90,8 +90,16 @@ const SignIn = () => {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault()
+      const lastName = values.fullName.split(' ').slice(1).join(' ')
       if (values.password1 !== values.password2) {
         setErros((prevValues) => ({ ...prevValues, password1: 'As senhas devem ser iguais' }))
+        return
+      }
+      if (lastName.length === 0) {
+        setErros((prevValues) => ({
+          ...prevValues,
+          fullName: 'Preencha seu nome completo',
+        }))
         return
       }
       if (values.password1.length < 6) {
@@ -117,7 +125,7 @@ const SignIn = () => {
         registerUser({
           ...payload,
           firstName: values.fullName.split(' ')[0],
-          lastName: values.fullName.split(' ').slice(1).join(' '),
+          lastName,
           profileImage: profilePicture.id,
         })
       )
@@ -138,12 +146,13 @@ const SignIn = () => {
           CADASTRE-SE JÁ
         </Typography>
         <Typography className={styles.text} color="primary" component="h2" variant="h2">
+          <Link component={RouterLink} to="/login">
+            Para se logar, clique aqui
+          </Link>{' '}
+          <br />
           Ei, Microempreendedor de Fortaleza! Está precisando de uma ajudinha com as vendas e ainda
           que fazer parte de uma rede que está ativamente ajudando no combate ao COVID-19? Faça seu
           cadastro!
-          <Link component={RouterLink} to="/login">
-            Para se logar, clique aqui
-          </Link>
         </Typography>
         <form onSubmit={handleSubmit}>
           <Grid item container direction="column" spacing={2} className={styles.inputs}>
