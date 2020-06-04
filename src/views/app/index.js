@@ -48,7 +48,7 @@ const App = ({ children }) => {
             <Button component={RouterLink} className={styles.link} to="/quem-somos">
               {isMobile ? 'nós' : 'quem somos'}
             </Button>
-            <Button component={RouterLink} className={styles.link} to="/">
+            <Button component={RouterLink} className={styles.link} to="/apoie-o-projeto">
               Apoie {!isMobile && 'o projeto'}
             </Button>
             {isLogged ? (

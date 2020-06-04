@@ -11,6 +11,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import './index.css'
 import { Router } from '@reach/router'
 
+import SupportUs from 'views/support-us'
 import rootReducer from 'modules/reducers'
 import App from 'views/app'
 import LandingPage from 'views/landing'
@@ -173,6 +174,7 @@ ReactDOM.render(
           <CreateSeller path="/sobre-seu-negocio" />
           <Product path="/produto" />
           <ThankYou path="/obrigada" />
+          <SupportUs path="/apoie-o-projeto" />
           <Category path="/:category" />
           <Seller path="/loja/:slug" />
           <SellerProduct path="/loja/:slug/:id" />

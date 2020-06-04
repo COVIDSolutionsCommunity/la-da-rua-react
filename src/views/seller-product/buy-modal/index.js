@@ -31,6 +31,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
     email: '',
     telephoneNumber: '',
     donationCategory: '',
+    error: '',
   })
   const styles = useStyles()
   const isLoading = useSelector(isBuying)
@@ -43,6 +44,14 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
   }, [])
 
   const onConfirmClick = useCallback(() => {
+    if (
+      !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        values.email
+      )
+    ) {
+      setValues((prevValues) => ({ ...prevValues, error: 'Insira um email válido' }))
+      return
+    }
     dispatch(buySomething(slug, values))
   }, [dispatch, slug, values])
 
@@ -98,13 +107,11 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
         <>
           <DialogTitle disableTypography id="form-dialog-title">
             <Typography color="primary" component="h1" variant="h2">
-              Obrigada pela informação
+              Compre com a gente
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Para entrar em contato com o vendedor, basta clicar no botão abaixo
-            </DialogContentText>
+            <DialogContentText>Para conseguir o contato com o vendedor</DialogContentText>
             <Grid container direction="column" spacing={2}>
               <Grid item>
                 <GeneralInput
@@ -128,6 +135,8 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
                   placeholder="E-mail"
                   name="email"
                   onChange={onChange}
+                  error={values.error?.length > 0}
+                  helperText={values.error?.length > 0 && values.error}
                 />
               </Grid>
               <Grid item>
@@ -139,8 +148,8 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
                   label="Telefone"
                   placeholder="Telefone"
                   name="telephoneNumber"
-                  type="number"
                   onChange={onChange}
+                  phoneMask
                 />
               </Grid>
               <Grid item>
@@ -171,7 +180,11 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
             <Button onClick={handleClose} color="primary">
               Cancelar
             </Button>
-            <Button onClick={onConfirmClick} color="primary">
+            <Button
+              disabled={values.donationCategory.length === 0 || isLoading}
+              onClick={onConfirmClick}
+              color="primary"
+            >
               {isLoading ? <CircularProgress size={64} /> : 'Comprar'}
             </Button>
           </DialogActions>
