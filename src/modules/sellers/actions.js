@@ -7,6 +7,7 @@ const REQUEST = ['PENDING', 'FULFILLED', 'REJECTED', 'COUNT']
 export const GET_SELLERS_CATEGORY = defineAction('GET_SELLERS_CATEGORY', REQUEST)
 export const GET_SELLERS_SEARCH = defineAction('GET_SELLERS_SEARCH', REQUEST)
 export const GET_CURRENT_SELLER = defineAction('GET_CURRENT_SELLER', REQUEST)
+export const BUY_SOMETHING = defineAction('BUY_SOMETHING', REQUEST)
 
 export const getSellersCategory = (category) => (dispatch) => {
   return dispatch({
@@ -26,5 +27,12 @@ export const getSeller = (slug) => (dispatch) => {
   return dispatch({
     type: GET_CURRENT_SELLER.ACTION,
     payload: sellersServices.getSeller(slug),
+  })
+}
+
+export const buySomething = (slug, payload) => (dispatch) => {
+  return dispatch({
+    type: BUY_SOMETHING.ACTION,
+    payload: sellersServices.buySomething(slug, payload),
   })
 }

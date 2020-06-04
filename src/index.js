@@ -22,6 +22,7 @@ import Product from 'views/product'
 import ThankYou from 'views/thank-you'
 import Category from 'views/category'
 import Seller from 'views/seller'
+import SellerProduct from 'views/seller-product'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -174,6 +175,7 @@ ReactDOM.render(
           <ThankYou path="/obrigada" />
           <Category path="/:category" />
           <Seller path="/loja/:slug" />
+          <SellerProduct path="/loja/:slug/:id" />
         </App>
       </Router>
     </ThemeProvider>

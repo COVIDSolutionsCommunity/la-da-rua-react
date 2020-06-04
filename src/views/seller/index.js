@@ -3,8 +3,9 @@ import React, { useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import classnames from 'classnames'
-import { useParams } from '@reach/router'
+import { useParams, Link } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { CATEGORIES_COLORS } from 'utils/constants'
 import { getSeller } from 'modules/sellers/actions'
@@ -22,7 +23,13 @@ const Seller = () => {
     dispatch(getSeller(slug))
   }, [dispatch, slug])
 
-  if (!seller?.name) return null
+  if (!seller?.name) {
+    return (
+      <Grid container alignItems="center" justify="center">
+        <CircularProgress size={64} />
+      </Grid>
+    )
+  }
   return (
     <Grid className={styles.view}>
       <Grid item container alignItems="center" direction="column">
@@ -43,10 +50,10 @@ const Seller = () => {
         </Typography>
       </Grid>
       <Grid item className={styles.products}>
-        {seller.products.map((product) => (
-          <button type="button" key={product.id} className={styles.img}>
+        {seller?.products?.map((product) => (
+          <Link to={`${product.id}`} key={product.id} className={styles.img}>
             <img className={styles.product} src={product.image} alt="Imagem de capa da loja" />
-          </button>
+          </Link>
         ))}
       </Grid>
     </Grid>

@@ -38,7 +38,13 @@ const Category = () => {
     }
   }, [category, debounced, dispatch])
 
-  if (!sellers) return null
+  if (!sellers) {
+    return (
+      <Grid container alignItems="center" justify="center">
+        <CircularProgress size={64} />
+      </Grid>
+    )
+  }
   return (
     <Grid
       className={styles.content}

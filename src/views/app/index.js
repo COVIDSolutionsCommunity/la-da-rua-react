@@ -51,9 +51,15 @@ const App = ({ children }) => {
             <Button component={RouterLink} className={styles.link} to="/">
               Apoie {!isMobile && 'o projeto'}
             </Button>
-            <Button comp onent={RouterLink} className={styles.link} to="/">
-              Parcerias
-            </Button>
+            {isLogged ? (
+              <Button component={RouterLink} className={styles.link} to="/sobre-seu-negocio">
+                Minha loja
+              </Button>
+            ) : (
+              <Button component={RouterLink} className={styles.link} to="/">
+                Parcerias
+              </Button>
+            )}
             {isLogged ? (
               <Button component={Link} className={styles.link} onClick={onLogoutClick}>
                 LOG OUT

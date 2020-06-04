@@ -48,7 +48,7 @@ const Product = () => {
     if (previousProducts?.length) {
       setPreviousValues(previousProducts)
     }
-  }, [previousProducts, previousProducts?.length])
+  }, [previousProducts])
 
   const onChangePicture = useCallback(
     (event) => {

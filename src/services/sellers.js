@@ -1,7 +1,7 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable no-param-reassign */
 
-import { get } from 'utils/requests'
+import { get, post } from 'utils/requests'
 import { CATEGORIES_NAMES } from 'utils/constants'
 
 export const getSellers = () => get()('sellers/')
@@ -23,4 +23,6 @@ export const getSellersSearch = (category, name) =>
     },
   })
 
-export const getSeller = (slug) => get()(`sellers/${slug}`)
+export const getSeller = (slug) => get()(`sellers/${slug}/`)
+
+export const buySomething = (slug, payload) => post()(`sellers/${slug}/buy/`, payload)
