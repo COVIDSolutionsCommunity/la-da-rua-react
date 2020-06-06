@@ -91,4 +91,7 @@ export default makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     padding: 0,
   },
+  labelC: {
+    color: 'white',
+  },
 }))

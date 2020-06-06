@@ -16,6 +16,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import WhatsAppIcon from '@material-ui/icons/WhatsApp'
 import Link from '@material-ui/core/Link'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormLabel from '@material-ui/core/FormLabel'
 
 import GeneralInput from 'components/general-input'
 import { buySomething } from 'modules/sellers/actions'
@@ -37,6 +41,11 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
   const isLoading = useSelector(isBuying)
   const wasLoading = usePrevious(isLoading)
   const [finished, setFinished] = useState(false)
+  const [option, setValue] = useState('false')
+
+  const handleChange = useCallback((event) => {
+    setValue(String(event.target.value === 'true'))
+  }, [])
 
   const onChange = useCallback((event) => {
     const { name, value } = event.target
@@ -107,11 +116,16 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
         <>
           <DialogTitle disableTypography id="form-dialog-title">
             <Typography color="primary" component="h1" variant="h2">
-              Compre com a gente
+              Para liberar o link para contatar o microempreendedor, preencha os campos abaixo.
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>Para conseguir o contato com o vendedor</DialogContentText>
+            <DialogContentText>
+              Quer fazer uma doação e ajudar as pessoas em vulnerabilidade social? Deixe suas
+              doações com o vendedor ao coletar seu produto, nossas instituições parceiras as
+              coletarão e nós lhe deixaremos informados do destino delas! Para mais informações
+              sobre como funciona nosso projeto acesse @projetoladarua no Instagram.
+            </DialogContentText>
             <Grid container direction="column" spacing={2}>
               <Grid item>
                 <GeneralInput
@@ -153,6 +167,32 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
                 />
               </Grid>
               <Grid item>
+                <FormControl>
+                  <FormLabel component="legend"> Você quer fazer uma doação?</FormLabel>
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    value={option}
+                    onChange={handleChange}
+                    color="primary"
+                  >
+                    <FormControlLabel
+                      value="true"
+                      color="primary"
+                      className={styles.labelC}
+                      control={<Radio color="primary" />}
+                      label="Sim, irei fazer uma doação se a compra for finalizada"
+                    />
+                    <FormControlLabel
+                      value="false"
+                      control={<Radio color="primary" />}
+                      className={styles.labelC}
+                      label="Não, não pretendo fazer uma doação"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item>
                 <FormControl className={styles.formControl}>
                   <InputLabel className={styles.label} id="demo-simple-select-label">
                     Categoria da doação
@@ -167,6 +207,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
                     }}
                     variant="outlined"
                     fullWidth
+                    disabled={option === 'false'}
                   >
                     <MenuItem value="non_perishable_food">Alimentos não perecíveis</MenuItem>
                     <MenuItem value="hygiene_products">Produtos de Higiene</MenuItem>
@@ -181,7 +222,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
               Cancelar
             </Button>
             <Button
-              disabled={values.donationCategory.length === 0 || isLoading}
+              disabled={values.error.length > 0 || isLoading}
               onClick={onConfirmClick}
               color="primary"
             >
