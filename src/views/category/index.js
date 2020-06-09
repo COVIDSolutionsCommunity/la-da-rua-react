@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 
 import { getSellersCategory, getSellersSearch } from 'modules/sellers/actions'
 import { getSellers, isRegisterLoading } from 'modules/sellers/selectors'
-import { useDebounce } from 'utils/hooks'
+import { useDebounce, useReactGA } from 'utils/hooks'
 
 import MainCard from './card'
 import useStyles from './styles'
@@ -38,6 +38,7 @@ const Category = () => {
     }
   }, [category, debounced, dispatch])
 
+  useReactGA(category)
   if (!sellers) {
     return (
       <Grid container alignItems="center" justify="center">

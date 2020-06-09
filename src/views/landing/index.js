@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
+import ReactGA from 'react-ga'
 
+import { GOOGLE_ANALYTICS } from 'utils/environment'
 import food from 'assets/comida.png'
 import colagem from 'assets/colagem_logo.png'
 import logo from 'assets/logo_principal.png'
@@ -36,6 +38,11 @@ const sectionButtons = [
 
 const LandingPage = () => {
   const styles = useStyles()
+
+  useEffect(() => {
+    ReactGA.initialize(GOOGLE_ANALYTICS)
+    ReactGA.pageview('/')
+  }, [])
 
   return (
     <Grid item container alignItems="center" justify="center" className={styles.container}>

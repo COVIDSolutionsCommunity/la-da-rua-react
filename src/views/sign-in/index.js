@@ -16,7 +16,7 @@ import { useNavigate, Link as RouterLink } from '@reach/router'
 
 import { registerUser } from 'modules/user/actions'
 import { isRegisterLoading } from 'modules/user/selectors'
-import { usePrevious } from 'utils/hooks'
+import { usePrevious, useReactGA } from 'utils/hooks'
 import GeneralInput from 'components/general-input'
 
 import useStyles from './styles'
@@ -139,6 +139,7 @@ const SignIn = () => {
     }
   }, [isLoading, navigate, wasLoading])
 
+  useReactGA('cadastre-se')
   return (
     <Grid item className={styles.header} container alignItems="center" direction="row">
       <Grid className={styles.section} item>

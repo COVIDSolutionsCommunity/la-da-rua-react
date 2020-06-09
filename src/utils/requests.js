@@ -1,7 +1,7 @@
 import axios from 'axios'
 import humps from 'humps'
 
-const api = 'https://api-ladarua.herokuapp.com/api/v1/'
+import { API_URL } from 'utils/environment'
 
 const handleResponseError = (error) => new Promise((resolve, reject) => reject(error.response.data))
 
@@ -40,7 +40,7 @@ export const createFormData = (data) => {
 export const get = (key = null) => (endpoint, params = null) =>
   axios
     .get(
-      api.concat(endpoint),
+      API_URL.concat(endpoint),
       key && {
         headers: {
           Authorization: `Token ${key}`,
@@ -54,7 +54,7 @@ export const get = (key = null) => (endpoint, params = null) =>
 export const post = (key = null) => (endpoint, payload, applyHumps = true) =>
   axios
     .post(
-      api.concat(endpoint),
+      API_URL.concat(endpoint),
       applyHumps ? humps.decamelizeKeys(payload) : payload,
       key && {
         headers: {
@@ -69,7 +69,7 @@ export const post = (key = null) => (endpoint, payload, applyHumps = true) =>
 export const patch = (key) => (endpoint, payload, applyHumps = true) =>
   axios
     .patch(
-      api.concat(endpoint),
+      API_URL.concat(endpoint),
       applyHumps ? humps.decamelizeKeys(payload) : payload,
       key && {
         headers: {
@@ -83,7 +83,7 @@ export const patch = (key) => (endpoint, payload, applyHumps = true) =>
 export const del = (key) => (endpoint) =>
   axios
     .delete(
-      api.concat(endpoint),
+      API_URL.concat(endpoint),
       key && {
         headers: {
           Authorization: `Token ${key}`,

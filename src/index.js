@@ -24,6 +24,7 @@ import ThankYou from 'views/thank-you'
 import Category from 'views/category'
 import Seller from 'views/seller'
 import SellerProduct from 'views/seller-product'
+import Partners from 'views/partners'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -175,6 +176,7 @@ ReactDOM.render(
           <Product path="/produto" />
           <ThankYou path="/obrigada" />
           <SupportUs path="/apoie-o-projeto" />
+          <Partners path="/parcerias" />
           <Category path="/:category" />
           <Seller path="/loja/:slug" />
           <SellerProduct path="/loja/:slug/:id" />

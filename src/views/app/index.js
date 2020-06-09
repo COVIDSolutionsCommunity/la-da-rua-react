@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -8,6 +8,7 @@ import { Link as RouterLink } from '@reach/router'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { useSelector, useDispatch } from 'react-redux'
+import ReactGA from 'react-ga'
 
 import { useResizer } from 'utils/hooks'
 import logo from 'assets/logo_header.png'
@@ -15,6 +16,7 @@ import logo2 from 'assets/colagem_logo.png'
 import footer from 'assets/rodape.png'
 import { isLoggedIn } from 'modules/user/selectors'
 import { logout } from 'modules/user/actions'
+import { GOOGLE_ANALYTICS } from 'utils/environment'
 
 import useStyles from './styles'
 
@@ -27,6 +29,11 @@ const App = ({ children }) => {
   const onLogoutClick = useCallback(() => {
     dispatch(logout())
   }, [dispatch])
+
+  useEffect(() => {
+    ReactGA.initialize(GOOGLE_ANALYTICS)
+    ReactGA.pageview('/')
+  }, [])
 
   return (
     <Grid container className={styles.container}>
@@ -56,7 +63,7 @@ const App = ({ children }) => {
                 Minha loja
               </Button>
             ) : (
-              <Button component={RouterLink} className={styles.link} to="/">
+              <Button component={RouterLink} className={styles.link} to="/parcerias">
                 Parcerias
               </Button>
             )}

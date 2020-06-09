@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
+import ReactGA from 'react-ga'
 
 export const useModal = (initialMode = false) => {
   const [modalOpen, setModalOpen] = useState(initialMode)
@@ -62,4 +63,10 @@ export const useDebounce = (value, delay) => {
   )
 
   return debouncedValue
+}
+
+export const useReactGA = (route) => {
+  useEffect(() => {
+    ReactGA.pageview(`/${route}`)
+  }, [route])
 }

@@ -7,9 +7,9 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 
+import { useReactGA, useModal } from 'utils/hooks'
 import { getSeller } from 'modules/sellers/actions'
 import { currentSeller, getCurrentProduct } from 'modules/sellers/selectors'
-import { useModal } from 'utils/hooks'
 
 import useStyles from './styles'
 import BuyModal from './buy-modal'
@@ -33,6 +33,7 @@ const SellerProduct = () => {
     [id, seller?.products?.filter]
   )
 
+  useReactGA(slug + id)
   if (!seller?.name) {
     return (
       <Grid container alignItems="center" justify="center">
@@ -90,7 +91,7 @@ const SellerProduct = () => {
       {open && (
         <BuyModal
           slug={slug}
-          whatsappNumber={currentSeller.telephoneNumber}
+          whatsappNumber={seller.telephoneNumber}
           open={open}
           handleClose={handleClose}
         />

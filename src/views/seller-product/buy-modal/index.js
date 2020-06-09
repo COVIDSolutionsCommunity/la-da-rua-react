@@ -91,7 +91,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
           <DialogContent>
             <DialogContentText>
               Para entrar em contato com o vendedor da loja e efetuar a compra, basta clicar no
-              botão abaixo
+              botão abaixo pelo número {whatsappNumber}
             </DialogContentText>
             <Button
               variant="outlined"
@@ -99,7 +99,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
               fullWidth
               startIcon={<WhatsAppIcon />}
               component={Link}
-              href={`https://wa.me/55${whatsappNumber
+              href={`https://wa.me/${whatsappNumber
                 ?.match(/[0-9]/g)
                 ?.join('')}?text=Oi%20encontrei%20você%20no%20projeto%20la%20da%20rua`}
             >

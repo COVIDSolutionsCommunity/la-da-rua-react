@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { CATEGORIES_COLORS } from 'utils/constants'
 import { getSeller } from 'modules/sellers/actions'
 import { currentSeller } from 'modules/sellers/selectors'
+import { useReactGA } from 'utils/hooks'
 
 import useStyles from './styles'
 
@@ -23,6 +24,7 @@ const Seller = () => {
     dispatch(getSeller(slug))
   }, [dispatch, slug])
 
+  useReactGA(slug)
   if (!seller?.name) {
     return (
       <Grid container alignItems="center" justify="center">
