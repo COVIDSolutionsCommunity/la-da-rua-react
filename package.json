@@ -47,11 +47,6 @@
     "eject": "craco eject",
     "lint": "./node_modules/.bin/eslint ."
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
-  },
   "eslintConfig": {
     "extends": "react-app"
   },

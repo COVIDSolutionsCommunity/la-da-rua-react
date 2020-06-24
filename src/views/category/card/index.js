@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 350,
     padding: '12px',
   },
+  size: {
+    height: '450px',
+  },
   cover: {
     objectFit: 'contain',
   },
@@ -81,7 +84,7 @@ const MainCard = ({ seller }) => {
 
   return (
     <Card className={styles.root}>
-      <CardActionArea component={RouterLink} to={`/loja/${seller.slug}`}>
+      <CardActionArea className={styles.size} component={RouterLink} to={`/loja/${seller.slug}`}>
         {seller.coverImage ? (
           <CardMedia
             component="img"
@@ -122,7 +125,7 @@ const MainCard = ({ seller }) => {
         </CardContent>
       </CardActionArea>
       <Grid container alignItems="center" className={styles.margin}>
-        <img alt="Foto da marca" src={placeholder} className={styles.profile} />
+        <img alt="Foto da marca" src={seller.user.profileImage} className={styles.profile} />
         <Typography className={styles.user} variant="h5" component="h2">
           {seller.user.firstName} {seller.user.lastName}
         </Typography>
