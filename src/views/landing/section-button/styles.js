@@ -50,6 +50,6 @@ export default makeStyles((theme) => ({
     backgroundColor: '#ADC26D',
   },
   yellow: {
-    backgroundColor: '#F6F193',
+    backgroundColor: '#FFC720',
   },
 }))
