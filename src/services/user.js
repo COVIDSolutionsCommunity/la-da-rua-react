@@ -13,6 +13,18 @@ export const registerUser = (payload) => {
   )
 }
 
+export const updateUser = (payload, key) => {
+  const { profileImage, ...newPayload } = humps.decamelizeKeys(payload)
+  if (payload?.profileImage) {
+    return patch(key)(
+      'register/',
+      createFormData({ ...newPayload, profile_image: payload.profileImage }),
+      false
+    )
+  }
+  return patch()('register/', payload)
+}
+
 export const createSeller = (payload, key) => {
   const newPayload = humps.decamelizeKeys(payload)
   return post(key)(

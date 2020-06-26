@@ -149,11 +149,11 @@ const Product = () => {
     }
   }, [isLoading, navigate, wasLoading])
 
-  useEffect(() => {
-    if (!isUpdatingLoading && wasUpdatingLoading) {
-      navigate('/obrigada')
-    }
-  }, [isLoading, isUpdatingLoading, navigate, wasLoading, wasUpdatingLoading])
+  // useEffect(() => {
+  //   if (!isUpdatingLoading && wasUpdatingLoading) {
+  //     navigate('/obrigada')
+  //   }
+  // }, [isLoading, isUpdatingLoading, navigate, wasLoading, wasUpdatingLoading])
 
   return (
     <Grid item className={styles.header} container alignItems="center" direction="row">

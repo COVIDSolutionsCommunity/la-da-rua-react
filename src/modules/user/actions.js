@@ -14,12 +14,20 @@ export const GET_PRODUCTS = defineAction('GET_PRODUCTS', REQUEST)
 export const CREATE_PRODUCT = defineAction('CREATE_PRODUCT', REQUEST)
 export const UPDATE_PRODUCT = defineAction('UPDATE_PRODUCT', REQUEST)
 export const DELETE_PRODUCT = defineAction('DELETE_PRODUCT', REQUEST)
+export const UPDATE_USER = defineAction('UPDATE_USER', REQUEST)
 export const LOGOUT = 'LOGOUT'
 
-export const registerUser = (payload) => (dispatch) => {
+export const registerUser = (payload) => (dispatch, getState) => {
   return dispatch({
     type: REGISTER_USER.ACTION,
-    payload: userService.registerUser(payload),
+    payload: userService.registerUser(payload, getState().user.key),
+  })
+}
+
+export const updateUser = (payload) => (dispatch) => {
+  return dispatch({
+    type: UPDATE_USER.ACTION,
+    payload: userService.updateUser(payload),
   })
 }
 

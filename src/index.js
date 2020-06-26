@@ -25,6 +25,8 @@ import Category from 'views/category'
 import Seller from 'views/seller'
 import SellerProduct from 'views/seller-product'
 import Partners from 'views/partners'
+import Welcome from 'views/welcome'
+import AboutYou from 'views/about-you'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -172,6 +174,7 @@ ReactDOM.render(
           <WhoWeAre path="/quem-somos" />
           <SignIn path="/cadastre-se" />
           <Login path="/login" />
+          <Welcome path="/bem-vindo" />
           <CreateSeller path="/sobre-seu-negocio" />
           <Product path="/produto" />
           <ThankYou path="/obrigada" />
@@ -180,6 +183,7 @@ ReactDOM.render(
           <Category path="/:category" />
           <Seller path="/loja/:slug" />
           <SellerProduct path="/loja/:slug/:id" />
+          <AboutYou path="/sobre-voce" />
         </App>
       </Router>
     </ThemeProvider>

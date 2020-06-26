@@ -73,7 +73,7 @@ const Login = () => {
 
   useEffect(() => {
     if (!isLoading && wasLoading && Object.keys(error).length < 1) {
-      navigate('/sobre-seu-negocio')
+      navigate('/bem-vindo')
     }
   }, [error, isLoading, navigate, wasLoading])
 

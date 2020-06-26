@@ -14,6 +14,7 @@ import {
   GET_PRODUCTS,
   UPDATE_PRODUCT,
   LOGOUT,
+  UPDATE_USER,
 } from './actions'
 
 const INITIAL_STATE = {
@@ -68,6 +69,13 @@ const user = createReducer(INITIAL_STATE, {
     })
   },
   [LOGIN.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      cookies.save('key', payload.key)
+      previousState.key = payload.key
+      setObjectKeys(previousState, payload.user)
+    })
+  },
+  [UPDATE_USER.FULFILLED]: (state, { payload }) => {
     return produce(state, (previousState) => {
       cookies.save('key', payload.key)
       previousState.key = payload.key

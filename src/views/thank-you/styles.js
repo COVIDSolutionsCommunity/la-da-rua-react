@@ -2,9 +2,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
   header: {
-    marginTop: '-80px',
+    marginTop: '-20px',
     height: '90vh',
     boxSizing: 'border-box',
+    width: '100vw',
   },
   title: {
     [theme.breakpoints.down('sm')]: {

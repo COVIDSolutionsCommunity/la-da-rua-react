@@ -59,7 +59,7 @@ const App = ({ children }) => {
               Apoie {!isMobile && 'o projeto'}
             </Button>
             {isLogged ? (
-              <Button component={RouterLink} className={styles.link} to="/sobre-seu-negocio">
+              <Button component={RouterLink} className={styles.link} to="/bem-vindo">
                 Minha loja
               </Button>
             ) : (
