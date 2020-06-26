@@ -1,6 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
+  grid: {
+    paddingTop: '36px',
+
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '0',
+    },
+  },
   section: {
     padding: '65px 45px 65px 150px',
     boxSizing: 'border-box',
@@ -27,5 +34,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: '18px',
     },
+  },
+  url: {
+    margin: '32px 0',
   },
 }))
