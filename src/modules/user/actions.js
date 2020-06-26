@@ -4,7 +4,7 @@ import * as userService from 'services/user'
 
 const REQUEST = ['PENDING', 'FULFILLED', 'REJECTED', 'COUNT']
 
-export const GET_MUSIC = defineAction('GET_MUSIC', REQUEST)
+export const GET_USER = defineAction('GET_USER', REQUEST)
 export const REGISTER_USER = defineAction('REGISTER_USER', REQUEST)
 export const LOGIN = defineAction('LOGIN', REQUEST)
 export const CREATE_SELLER = defineAction('CREATE_SELLER', REQUEST)
@@ -17,6 +17,13 @@ export const DELETE_PRODUCT = defineAction('DELETE_PRODUCT', REQUEST)
 export const UPDATE_USER = defineAction('UPDATE_USER', REQUEST)
 export const LOGOUT = 'LOGOUT'
 
+export const getMyUser = () => (dispatch, getState) => {
+  return dispatch({
+    type: GET_USER.ACTION,
+    payload: userService.getMyUser(getState().user.key),
+  })
+}
+
 export const registerUser = (payload) => (dispatch, getState) => {
   return dispatch({
     type: REGISTER_USER.ACTION,
@@ -24,10 +31,10 @@ export const registerUser = (payload) => (dispatch, getState) => {
   })
 }
 
-export const updateUser = (payload) => (dispatch) => {
+export const updateUser = (payload) => (dispatch, getState) => {
   return dispatch({
     type: UPDATE_USER.ACTION,
-    payload: userService.updateUser(payload),
+    payload: userService.updateUser(payload, getState().user.key),
   })
 }
 

@@ -24,6 +24,7 @@ const ProductCard = ({
   onDeleteProductClick,
   isPrevious,
   onUpdateClick,
+  onAddClick,
 }) => {
   const styles = useStyles()
 
@@ -140,7 +141,7 @@ const ProductCard = ({
             <IconButton onClick={onDeleteProductClick} className={styles.buttonIcon}>
               <DeleteIcon color="primary" />
             </IconButton>
-            {isPrevious && (
+            {isPrevious ? (
               <Button
                 onClick={onUpdateClick}
                 variant="outlined"
@@ -149,6 +150,10 @@ const ProductCard = ({
                 disabled={isLoading}
               >
                 {isLoading ? <CircularProgress size={24} /> : 'ATUALIZAR PRODUTO'}
+              </Button>
+            ) : (
+              <Button variant="outlined" color="primary" onClick={onAddClick} disabled={isLoading}>
+                {isLoading ? <CircularProgress size={24} /> : 'ADICIONAR PRODUTO'}
               </Button>
             )}
           </Grid>
@@ -169,6 +174,7 @@ ProductCard.propTypes = {
   onChangePicture: PropTypes.func.isRequired,
   onDeleteProductClick: PropTypes.func.isRequired,
   onUpdateClick: PropTypes.func,
+  onAddClick: PropTypes.func,
   isLoading: PropTypes.bool,
   id: PropTypes.number.isRequired,
   profilePicture: PropTypes.shape({
@@ -181,6 +187,7 @@ ProductCard.defaultProps = {
   isLoading: false,
   isPrevious: false,
   onUpdateClick: () => {},
+  onAddClick: () => {},
 }
 
 export default React.memo(ProductCard)

@@ -3,6 +3,7 @@ export const CATEGORIES_TYPES = {
   CLOTHING: 'clothing',
   DECORATION: 'decoration',
   MISC: 'misc',
+  SERVICES: 'services',
 }
 
 export const CATEGORIES_NAMES = {
@@ -10,6 +11,7 @@ export const CATEGORIES_NAMES = {
   vestimenta: [CATEGORIES_TYPES.CLOTHING],
   decoracao: [CATEGORIES_TYPES.DECORATION],
   variedades: [CATEGORIES_TYPES.MISC],
+  servicos: [CATEGORIES_TYPES.SERVICES],
 }
 
 export const CATEGORIES_COLORS = {
@@ -17,4 +19,5 @@ export const CATEGORIES_COLORS = {
   [CATEGORIES_TYPES.CLOTHING]: 'green',
   [CATEGORIES_TYPES.DECORATION]: 'blue',
   [CATEGORIES_TYPES.MISC]: 'yellow',
+  [CATEGORIES_TYPES.services]: 'purple',
 }

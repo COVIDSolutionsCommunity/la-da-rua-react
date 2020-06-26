@@ -6,7 +6,7 @@ import { GOOGLE_ANALYTICS } from 'utils/environment'
 import food from 'assets/comida.png'
 import colagem from 'assets/colagem_logo.png'
 import logo from 'assets/logo_principal.png'
-import decoration from 'assets/decoracao.png'
+import decoration from 'assets/services.png'
 import dress from 'assets/vestimenta.png'
 import variaties from 'assets/variedades.png'
 
@@ -25,9 +25,9 @@ const sectionButtons = [
     color: 'blue',
   },
   {
-    name: 'decoração',
+    name: 'serviços',
     img: decoration,
-    color: 'green',
+    color: 'purple',
   },
   {
     name: 'variedades',

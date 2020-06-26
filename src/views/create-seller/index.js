@@ -254,8 +254,8 @@ const CreateSeller = () => {
                 >
                   <MenuItem value="food">Comida</MenuItem>
                   <MenuItem value="clothing">Vestimenta</MenuItem>
-                  <MenuItem value="decoration">Decoracão</MenuItem>
                   <MenuItem value="misc">Variedades</MenuItem>
+                  <MenuItem value="services">Serviços</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

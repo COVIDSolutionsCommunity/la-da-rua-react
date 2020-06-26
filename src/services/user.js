@@ -17,12 +17,12 @@ export const updateUser = (payload, key) => {
   const { profileImage, ...newPayload } = humps.decamelizeKeys(payload)
   if (payload?.profileImage) {
     return patch(key)(
-      'register/',
+      'user/',
       createFormData({ ...newPayload, profile_image: payload.profileImage }),
       false
     )
   }
-  return patch()('register/', payload)
+  return patch(key)('user/', newPayload)
 }
 
 export const createSeller = (payload, key) => {
@@ -47,6 +47,8 @@ export const updateSeller = (payload, key) => {
 }
 
 export const getSeller = (key) => get(key)('my-seller/')
+
+export const getMyUser = (key) => get(key)('user/')
 
 export const login = (payload) => post()('login/', payload)
 

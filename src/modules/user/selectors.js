@@ -5,6 +5,7 @@ import {
   UPDATE_SELLER,
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
+  UPDATE_USER,
 } from './actions'
 
 export const isRegisterLoading = ({ loading }) => !!loading[REGISTER_USER.ACTION]
@@ -19,6 +20,8 @@ export const isCreatingProduct = ({ loading }) => !!loading[CREATE_PRODUCT.ACTIO
 export const createError = ({ error }) => error[CREATE_PRODUCT.ACTION]
 export const isUpdatingProduct = ({ loading }) => !!loading[UPDATE_PRODUCT.ACTION]
 export const updateProductError = ({ error }) => error[UPDATE_PRODUCT.ACTION]
+export const isUpdatingUser = ({ loading }) => !!loading[UPDATE_USER.ACTION]
+export const updateUserError = ({ error }) => error[UPDATE_USER.ACTION]
 
 export const getMySeller = (state) => state.user.seller
 export const getUser = (state) => state.user

@@ -74,11 +74,12 @@ export const patch = (key) => (endpoint, payload, applyHumps = true) =>
       key && {
         headers: {
           Authorization: `Token ${key}`,
+          // 'Content-Type': 'multipart/form-data',
+          // 'Access-Control-Allow-Origin': '*',
         },
       }
     )
     .then(({ data }) => humps.camelizeKeys(data))
-    .catch(handleResponseError)
 
 export const del = (key) => (endpoint) =>
   axios

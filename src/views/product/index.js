@@ -3,8 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { useDispatch, useSelector } from 'react-redux'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import { useNavigate } from '@reach/router'
+import { Link } from '@reach/router'
 
 import { createProduct, getProducts, deleteProduct, updateProduct } from 'modules/user/actions'
 import {
@@ -13,7 +12,6 @@ import {
   isUpdatingProduct,
   createError,
 } from 'modules/user/selectors'
-import { usePrevious } from 'utils/hooks'
 import authRoute from 'utils/hoc'
 
 import useStyles from './styles'
@@ -35,10 +33,7 @@ const Product = () => {
   const previousProducts = useSelector(getMyProducts)
   const error = useSelector(createError)
   const isLoading = useSelector(isCreatingProduct)
-  const wasLoading = usePrevious(isLoading)
   const isUpdatingLoading = useSelector(isUpdatingProduct)
-  const wasUpdatingLoading = usePrevious(isUpdatingLoading)
-  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getProducts())
@@ -127,27 +122,43 @@ const Product = () => {
     setProfilePicture((prevState) => [...prevState, { id: '', url: '' }])
   }, [])
 
-  const handleSubmit = useCallback(
-    (event) => {
-      event.preventDefault()
-      values.map((value, index) =>
-        dispatch(
-          createProduct({
-            ...value,
-            price: value.price.replace(',', ''),
-            profileImage: profilePicture[index].id,
-          })
-        )
+  const onAddProductClick = useCallback(
+    (value, index) => () => {
+      dispatch(
+        createProduct({
+          ...value,
+          price: value.price.replace(',', ''),
+          profileImage: profilePicture[index].id,
+        })
       )
+      setValues((prevState) => prevState.filter((file, number) => number !== index))
+      setProfilePicture((prevState) => prevState.filter((file, number) => number !== index))
+      onAddClick()
     },
-    [dispatch, profilePicture, values]
+    [dispatch, onAddClick, profilePicture]
   )
 
-  useEffect(() => {
-    if (!isLoading && wasLoading) {
-      navigate('/obrigada')
-    }
-  }, [isLoading, navigate, wasLoading])
+  // const handleSubmit = useCallback(
+  //   (event) => {
+  //     event.preventDefault()
+  //     values.map((value, index) =>
+  //       dispatch(
+  //         createProduct({
+  //           ...value,
+  //           price: value.price.replace(',', ''),
+  //           profileImage: profilePicture[index].id,
+  //         })
+  //       )
+  //     )
+  //   },
+  //   [dispatch, profilePicture, values]
+  // )
+
+  // useEffect(() => {
+  //   if (!isLoading && wasLoading) {
+  //     navigate('/obrigada')
+  //   }
+  // }, [isLoading, navigate, wasLoading])
 
   // useEffect(() => {
   //   if (!isUpdatingLoading && wasUpdatingLoading) {
@@ -166,7 +177,7 @@ const Product = () => {
           no botão Adicionar outro Produto! Caso já tenha adicionado todos os seus produtos, clique
           em finalizar!
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form>
           {previousValues.map((value, index) => (
             <ProductCard
               id={index}
@@ -191,6 +202,8 @@ const Product = () => {
               onDeleteClick={onDeleteClick(index)}
               onDeleteProductClick={onDeleteProductClick(index)}
               profilePicture={profilePicture}
+              onAddClick={onAddProductClick(value, index)}
+              isLoading={isLoading}
             />
           ))}
           {error?.length && (
@@ -211,11 +224,12 @@ const Product = () => {
             <Button
               variant="outlined"
               color="primary"
-              type="submit"
               className={styles.addButton}
               disabled={isLoading || isUpdatingLoading}
+              component={Link}
+              to="/obrigada"
             >
-              {isLoading || isUpdatingLoading ? <CircularProgress size={24} /> : 'FINALIZAR'}
+              finalizar
             </Button>
           </Grid>
         </form>

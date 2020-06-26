@@ -15,6 +15,8 @@ import {
   UPDATE_PRODUCT,
   LOGOUT,
   UPDATE_USER,
+  GET_USER,
+  DELETE_PRODUCT,
 } from './actions'
 
 const INITIAL_STATE = {
@@ -65,7 +67,13 @@ const user = createReducer(INITIAL_STATE, {
     return produce(state, (previousState) => {
       cookies.save('key', payload.key)
       previousState.key = payload.key
-      setObjectKeys(previousState, payload.user)
+      setObjectKeys(previousState, payload)
+    })
+  },
+  [GET_USER.FULFILLED]: (state, { payload }) => {
+    return produce(state, (previousState) => {
+      previousState.key = state.key
+      setObjectKeys(previousState, payload)
     })
   },
   [LOGIN.FULFILLED]: (state, { payload }) => {
@@ -77,9 +85,7 @@ const user = createReducer(INITIAL_STATE, {
   },
   [UPDATE_USER.FULFILLED]: (state, { payload }) => {
     return produce(state, (previousState) => {
-      cookies.save('key', payload.key)
-      previousState.key = payload.key
-      setObjectKeys(previousState, payload.user)
+      setObjectKeys(previousState, payload)
     })
   },
   [CREATE_SELLER.FULFILLED]: (state, { payload }) => {
@@ -101,6 +107,12 @@ const user = createReducer(INITIAL_STATE, {
       const { user, ...values } = payload
       setObjectKeys(previousState, payload.user)
       setObjectKeys(previousState.seller, values)
+    })
+  },
+  [DELETE_PRODUCT.FULFILLED]: (state, { meta }) => {
+    const newProducts = state.seller.products.filter((product) => product.id !== meta.id)
+    return produce(state, (previousState) => {
+      previousState.seller.products = newProducts
     })
   },
   [CREATE_PRODUCT.FULFILLED]: (state, { payload }) => {

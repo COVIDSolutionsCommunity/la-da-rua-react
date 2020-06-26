@@ -43,8 +43,8 @@ export default makeStyles((theme) => ({
   pink: {
     backgroundColor: '#DC8474',
   },
-  green: {
-    backgroundColor: '#83B4BB',
+  purple: {
+    backgroundColor: '#CD59C8',
   },
   blue: {
     backgroundColor: '#ADC26D',

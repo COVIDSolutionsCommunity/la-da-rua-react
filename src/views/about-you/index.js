@@ -14,10 +14,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useNavigate } from '@reach/router'
 
-import { updateUser, getSeller } from 'modules/user/actions'
-import { isRegisterLoading, getUser } from 'modules/user/selectors'
+import { updateUser, getMyUser } from 'modules/user/actions'
+import { isUpdatingUser, getUser } from 'modules/user/selectors'
 import { usePrevious, useReactGA } from 'utils/hooks'
 import GeneralInput from 'components/general-input'
+import authRoute from 'utils/hoc'
 
 import useStyles from './styles'
 
@@ -39,6 +40,7 @@ const INITIAL_STATE = {
   fullName: '',
   email: '',
   gender: '',
+  description: '',
 }
 
 const AboutYou = () => {
@@ -47,13 +49,15 @@ const AboutYou = () => {
   const [values, setValues] = useState(INITIAL_STATE)
   const [errors, setErros] = useState('')
   const [profilePicture, setProfilePicture] = useState([])
+  console.log('AboutYou -> profilePicture', profilePicture)
   const currentUser = useSelector(getUser)
-  const isLoading = useSelector(isRegisterLoading)
+  console.log('AboutYou -> currentUser', currentUser)
+  const isLoading = useSelector(isUpdatingUser)
   const wasLoading = usePrevious(isLoading)
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(getSeller(currentUser?.seller?.slug))
+    dispatch(getMyUser(currentUser?.seller?.slug))
   }, [dispatch, currentUser?.seller?.slug])
 
   const onChangePicture = useCallback((event) => {
@@ -79,9 +83,9 @@ const AboutYou = () => {
         (obj, item) => Object.assign(obj, { [item]: currentUser[item] }),
         {}
       )
-      setValues({ ...initialValue, fullName: currentUser.firstName + currentUser.lastName })
+      setValues({ ...initialValue, fullName: `${currentUser.firstName} ${currentUser.lastName}` })
       setProfilePicture({
-        url: currentUser.profilePicture,
+        url: currentUser.profileImage,
       })
     }
   }, [currentUser])
@@ -223,7 +227,7 @@ const AboutYou = () => {
                 color="primary"
                 type="submit"
                 className={styles.button}
-                disabled={isLoading || !profilePicture?.id}
+                disabled={isLoading}
               >
                 {isLoading ? <CircularProgress size={24} /> : 'CADASTRE-SE'}
               </Button>
@@ -235,4 +239,4 @@ const AboutYou = () => {
   )
 }
 
-export default React.memo(AboutYou)
+export default authRoute(React.memo(AboutYou))
