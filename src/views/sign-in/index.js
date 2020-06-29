@@ -66,9 +66,7 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const [values, setValues] = useState(INITIAL_STATE)
   const [errors, setErros] = useState('')
-  console.log('SignIn -> errors', errors)
   const [profilePicture, setProfilePicture] = useState([])
-  console.log('SignIn -> profilePicture', profilePicture)
   const isLoading = useSelector(isRegisterLoading)
   const wasLoading = usePrevious(isLoading)
   const navigate = useNavigate()
@@ -137,7 +135,7 @@ const SignIn = () => {
         })
       )
     },
-    [dispatch, values]
+    [dispatch, profilePicture.id, values]
   )
 
   useEffect(() => {

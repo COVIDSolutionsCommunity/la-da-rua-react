@@ -126,7 +126,7 @@ const CreateSeller = () => {
         url: isCurrent.coverImage,
       })
     }
-  }, [isCurrent, isCurrent?.name?.length])
+  }, [isCurrent])
 
   const onChangePicture = useCallback((event) => {
     const file = event.currentTarget.files[0]
@@ -168,7 +168,8 @@ const CreateSeller = () => {
         })
       )
     },
-    [dispatch, isCurrent?.name?.length, profilePicture.id, values]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [dispatch, isCurrent, profilePicture.id, values]
   )
 
   useEffect(() => {

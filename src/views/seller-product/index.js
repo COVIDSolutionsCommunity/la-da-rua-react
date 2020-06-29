@@ -30,7 +30,8 @@ const SellerProduct = () => {
 
   const anotherProducts = useMemo(
     () => seller?.products?.filter((product) => product.id !== Number(id)),
-    [id, seller?.products?.filter]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [id, seller]
   )
 
   useReactGA(slug + id)

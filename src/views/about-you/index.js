@@ -56,7 +56,7 @@ const AboutYou = () => {
 
   useEffect(() => {
     dispatch(getMyUser(currentUser?.seller?.slug))
-  }, [dispatch, currentUser?.seller?.slug])
+  }, [dispatch, currentUser])
 
   const onChangePicture = useCallback((event) => {
     const file = event.currentTarget.files[0]
