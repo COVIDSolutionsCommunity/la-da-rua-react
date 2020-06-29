@@ -68,6 +68,7 @@ const SellerProduct = () => {
               fullWidth
               startIcon={<ShoppingBasketIcon />}
               onClick={handleClose}
+              className={styles.buyButton}
             >
               COMPRAR
             </Button>

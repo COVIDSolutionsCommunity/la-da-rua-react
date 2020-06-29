@@ -22,8 +22,8 @@ const WhoWeAre = () => {
           <Typography className={styles.text} color="primary" component="h2" variant="h2">
             Somos uma rede que visa alavancar a economia local e praticar a solidariedade em
             Fortaleza, Ceará. Nosso objetivo é valorizar o trabalho dos microempreendedores e
-            estreitar suas as relações com os clientes, enquanto fazemos o bem oferecendo
-            alternativas para viabilizar doações para pessoas em vulnerabilidade social.
+            estreitar suas relações com os clientes, enquanto fazemos o bem oferecendo alternativas
+            para viabilizar doações para pessoas em vulnerabilidade social.
           </Typography>
         </Grid>
         <Grid item xs={isMobile ? 12 : 6}>

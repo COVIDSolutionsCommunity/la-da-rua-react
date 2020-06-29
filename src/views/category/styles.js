@@ -17,6 +17,7 @@ export default makeStyles((theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       gridTemplateColumns: '1fr',
+      gridGap: '24px',
     },
   },
   input: {

@@ -40,7 +40,7 @@ const SupportUs = () => {
         </Typography>
         <Typography className={styles.text} color="primary" component="h2" variant="h2">
           Você tem interesse em ajudar o LádaRua a promover o desenvolvimento de microempreendedores
-          locais e ajuda pessoas em vulnerabilidade social? Se a resposta para a pergunta acima foi
+          locais e ajudar pessoas em vulnerabilidade social? Se a resposta para a pergunta acima foi
           “sim”, saiba que uma das formas é realizando uma doação, no valor que desejar:
         </Typography>
       </Grid>

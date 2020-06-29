@@ -17,6 +17,7 @@ import Link from '@material-ui/core/Link'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PlaceIcon from '@material-ui/icons/Place'
 import PropTypes from 'prop-types'
+import ClampLines from 'react-clamp-lines'
 
 import placeholder from 'assets/comida.png'
 
@@ -24,9 +25,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 350,
     padding: '12px',
+    margin: '8px 0',
+    display: 'grid',
+    gridTemplateRows: 'min-content auto',
+    gridGap: '8px',
   },
   size: {
-    height: '450px',
+    height: '100%',
   },
   cover: {
     objectFit: 'contain',
@@ -42,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Oswald',
     textTransform: 'uppercase',
     fontWeight: '100',
-    marginBottom: '32px',
   },
   user: {
     color: theme.palette.secondary.main,
@@ -51,6 +55,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     marginLeft: '16px',
     fontSize: '18px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: '200px',
+    },
   },
   loading: {
     position: 'absolute',
@@ -69,6 +80,12 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     borderTop: '1px solid #000000',
     paddingTop: 8,
+    alignSelf: 'end',
+  },
+  content: {
+    display: 'grid',
+    gridTemplateRows: 'min-content min-content',
+    gridGap: '8px',
   },
 }))
 
@@ -100,28 +117,21 @@ const MainCard = ({ seller }) => {
         {seller.coverImage && isPictureLoading && (
           <CircularProgress color="secondary" className={styles.loading} />
         )}
-        <CardContent>
-          <Grid container spacing={1}>
-            <Grid container item direction="row" justify="flex-start" alignItems="center">
-              <Typography className={styles.name} variant="h5" component="h2">
-                {seller.name}
-              </Typography>
-            </Grid>
-            {seller.description && (
-              <Grid
-                container
-                item
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                className={styles.obs}
-              >
-                <Typography className={styles.description} variant="h5" component="h2">
-                  {seller.user.description}
-                </Typography>
-              </Grid>
-            )}
-          </Grid>
+        <CardContent className={styles.content}>
+          <Typography className={styles.name} variant="h5" component="h2">
+            {seller.name}
+          </Typography>
+          {seller.description && (
+            <ClampLines
+              text={seller.user.description}
+              id="really-unique-id"
+              lines={10}
+              ellipsis="..."
+              moreText="Ler mais"
+              innerElement="p"
+              className={styles.description}
+            />
+          )}
         </CardContent>
       </CardActionArea>
       <Grid container alignItems="center" className={styles.margin}>

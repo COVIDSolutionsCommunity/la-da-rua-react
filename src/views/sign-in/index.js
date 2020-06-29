@@ -58,6 +58,7 @@ const INITIAL_STATE = {
   password1: '',
   password2: '',
   gender: '',
+  description: '',
 }
 
 const SignIn = () => {
@@ -65,7 +66,9 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const [values, setValues] = useState(INITIAL_STATE)
   const [errors, setErros] = useState('')
+  console.log('SignIn -> errors', errors)
   const [profilePicture, setProfilePicture] = useState([])
+  console.log('SignIn -> profilePicture', profilePicture)
   const isLoading = useSelector(isRegisterLoading)
   const wasLoading = usePrevious(isLoading)
   const navigate = useNavigate()
@@ -84,7 +87,7 @@ const SignIn = () => {
   }, [])
 
   const onDeleteClick = useCallback(() => {
-    setProfilePicture([])
+    setProfilePicture({})
   }, [])
 
   const handleSubmit = useCallback(
@@ -117,8 +120,12 @@ const SignIn = () => {
         setErros((prevValues) => ({ ...prevValues, email: 'Insira um email válido' }))
         return
       }
-      if (!profilePicture[0]?.id) {
-        setErros((prevState) => ({ ...prevState, profilePicture: 'Foto obrigatória' }))
+      if (values.description.length > 500) {
+        setErros((prevState) => ({
+          ...prevState,
+          description: 'Limite máximo de caracteres atingidos, escreva uma descrição menor',
+        }))
+        return
       }
       const { fullName, ...payload } = values
       dispatch(
@@ -130,7 +137,7 @@ const SignIn = () => {
         })
       )
     },
-    [dispatch, profilePicture, values]
+    [dispatch, values]
   )
 
   useEffect(() => {
@@ -147,12 +154,12 @@ const SignIn = () => {
           CADASTRE-SE JÁ
         </Typography>
         <Typography className={styles.text} color="primary" component="h2" variant="h2">
-          <Link component={RouterLink} to="/login">
-            Para se logar, clique aqui
+          <Link className={styles.linkText} component={RouterLink} to="/login">
+            Caso já tenha uma conta, clique aqui
           </Link>{' '}
           <br />
           Ei, Microempreendedor de Fortaleza! Está precisando de uma ajudinha com as vendas e ainda
-          que fazer parte de uma rede que está ativamente ajudando no combate ao COVID-19? Faça seu
+          quer fazer parte de uma rede que está ativamente ajudando no combate ao COVID-19? Faça seu
           cadastro!
         </Typography>
         <form onSubmit={handleSubmit}>

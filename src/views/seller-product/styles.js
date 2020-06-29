@@ -57,4 +57,7 @@ export default makeStyles((theme) => ({
     padding: '10px 50px',
     boxSizing: 'border-box',
   },
+  buyButton: {
+    backgroundColor: 'yellow',
+  },
 }))
