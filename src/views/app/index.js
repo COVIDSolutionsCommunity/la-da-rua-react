@@ -73,7 +73,7 @@ const App = ({ children }) => {
               </Button>
             ) : (
               <Button component={RouterLink} className={styles.link} to="/cadastre-se">
-                Cadastre-se
+                CADASTRE-SE
               </Button>
             )}
           </Grid>
