@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
+    maxWidth: '270px',
 
     [theme.breakpoints.down('sm')]: {
       maxWidth: '200px',
