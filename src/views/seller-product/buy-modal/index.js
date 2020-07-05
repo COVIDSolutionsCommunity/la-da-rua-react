@@ -81,7 +81,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      {finished ? (
+      {!finished ? (
         <>
           <DialogTitle disableTypography id="form-dialog-title">
             <Typography color="primary" component="h1" variant="h2">
@@ -99,7 +99,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
               fullWidth
               startIcon={<WhatsAppIcon />}
               component={Link}
-              href={`https://wa.me/${whatsappNumber
+              href={`https://wa.me/55${whatsappNumber
                 ?.match(/[0-9]/g)
                 ?.join('')}?text=Oi%20encontrei%20você%20no%20projeto%20la%20da%20rua`}
             >

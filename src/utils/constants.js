@@ -14,6 +14,11 @@ export const CATEGORIES_NAMES = {
   servicos: [CATEGORIES_TYPES.SERVICES],
 }
 
+export const CATEGORIES_PORTUGUESE = Object.keys(CATEGORIES_NAMES).reduce((ret, key) => {
+  ret[CATEGORIES_NAMES[key]] = key
+  return ret
+}, {})
+
 export const CATEGORIES_COLORS = {
   [CATEGORIES_TYPES.FOOD]: 'pink',
   [CATEGORIES_TYPES.CLOTHING]: 'green',

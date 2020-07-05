@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useCallback } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { useParams, Link } from '@reach/router'
+import { useParams, Link, useNavigate } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 
 import { useReactGA, useModal } from 'utils/hooks'
 import { getSeller } from 'modules/sellers/actions'
@@ -18,6 +19,7 @@ const SellerProduct = () => {
   const styles = useStyles()
   const { slug, id } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const seller = useSelector(currentSeller)
   const currentProduct = useSelector((state) => getCurrentProduct(state, id))
   const [open, handleClose] = useModal()
@@ -27,6 +29,10 @@ const SellerProduct = () => {
       dispatch(getSeller(slug))
     }
   }, [dispatch, seller.name, slug])
+
+  const goBack = useCallback(() => {
+    navigate(-1)
+  }, [navigate])
 
   const anotherProducts = useMemo(
     () => seller?.products?.filter((product) => product.id !== Number(id)),
@@ -53,6 +59,14 @@ const SellerProduct = () => {
           />
         </Grid>
         <Grid item className={styles.products}>
+          <Button
+            onClick={goBack}
+            className={styles.button}
+            color="primary"
+            startIcon={<KeyboardBackspaceIcon />}
+          >
+            Voltar para {seller.name}
+          </Button>
           <Typography color="secondary" className={styles.about} component="h3" variant="h3">
             {currentProduct.name}
           </Typography>

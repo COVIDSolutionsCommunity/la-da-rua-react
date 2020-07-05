@@ -1,13 +1,14 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import classnames from 'classnames'
-import { useParams, Link } from '@reach/router'
+import { useParams, Link, useNavigate } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Button from '@material-ui/core/Button'
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 
-import { CATEGORIES_COLORS } from 'utils/constants'
+import { CATEGORIES_COLORS, CATEGORIES_PORTUGUESE } from 'utils/constants'
 import { getSeller } from 'modules/sellers/actions'
 import { currentSeller } from 'modules/sellers/selectors'
 import { useReactGA } from 'utils/hooks'
@@ -18,11 +19,16 @@ const Seller = () => {
   const styles = useStyles()
   const { slug } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const seller = useSelector(currentSeller)
 
   useEffect(() => {
     dispatch(getSeller(slug))
   }, [dispatch, slug])
+
+  const goBack = useCallback(() => {
+    navigate(-1)
+  }, [navigate])
 
   useReactGA(slug)
   if (!seller?.name) {
@@ -35,6 +41,14 @@ const Seller = () => {
   return (
     <Grid className={styles.view}>
       <Grid item container alignItems="center" direction="column">
+        <Button
+          onClick={goBack}
+          className={styles.button}
+          color="primary"
+          startIcon={<KeyboardBackspaceIcon />}
+        >
+          Ver outras {CATEGORIES_PORTUGUESE[seller.category]}
+        </Button>
         <Typography
           color="primary"
           className={classnames(styles.name, styles[CATEGORIES_COLORS[seller.category]])}
