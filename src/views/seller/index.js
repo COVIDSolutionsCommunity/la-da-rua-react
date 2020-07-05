@@ -47,7 +47,10 @@ const Seller = () => {
           color="primary"
           startIcon={<KeyboardBackspaceIcon />}
         >
-          Ver outras {CATEGORIES_PORTUGUESE[seller.category]}
+          Voltar para{' '}
+          {CATEGORIES_PORTUGUESE[seller.category] === 'servicos'
+            ? 'serviços'
+            : CATEGORIES_PORTUGUESE[seller.category]}
         </Button>
         <Typography
           color="primary"

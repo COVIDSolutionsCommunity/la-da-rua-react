@@ -77,7 +77,7 @@ const Category = () => {
               Ver outras categorias
             </Button>
             <Typography className={styles.title} color="primary" variant="h1" component="h1">
-              {category}
+              {category === 'servicos' ? 'serviços' : category}
             </Typography>
             <TextField
               variant="filled"
