@@ -24,5 +24,5 @@ export const CATEGORIES_COLORS = {
   [CATEGORIES_TYPES.CLOTHING]: 'green',
   [CATEGORIES_TYPES.DECORATION]: 'blue',
   [CATEGORIES_TYPES.MISC]: 'yellow',
-  [CATEGORIES_TYPES.services]: 'purple',
+  [CATEGORIES_TYPES.SERVICES]: 'purple',
 }

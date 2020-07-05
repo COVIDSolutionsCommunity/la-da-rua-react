@@ -38,6 +38,8 @@ const Seller = () => {
       </Grid>
     )
   }
+
+  console.log(CATEGORIES_COLORS[seller.category])
   return (
     <Grid className={styles.view}>
       <Grid item container alignItems="center" direction="column">

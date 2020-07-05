@@ -29,13 +29,16 @@ export default makeStyles((theme) => ({
     backgroundColor: '#DC8474',
   },
   green: {
-    backgroundColor: '#83B4BB',
+    backgroundColor: '#ADC26D',
   },
   blue: {
     backgroundColor: '#ADC26D',
   },
   yellow: {
     backgroundColor: '#FFC720',
+  },
+  purple: {
+    backgroundColor: '#CD59C8',
   },
   img: {
     height: '200px',
