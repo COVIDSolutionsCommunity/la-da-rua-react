@@ -81,7 +81,7 @@ const BuyModal = ({ open, handleClose, slug, whatsappNumber }) => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      {!finished ? (
+      {finished ? (
         <>
           <DialogTitle disableTypography id="form-dialog-title">
             <Typography color="primary" component="h1" variant="h2">
