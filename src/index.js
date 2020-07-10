@@ -10,6 +10,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import './index.css'
 import { Router } from '@reach/router'
+import * as Sentry from '@sentry/react'
 
 import SupportUs from 'views/support-us'
 import rootReducer from 'modules/reducers'
@@ -29,6 +30,8 @@ import Welcome from 'views/welcome'
 import AboutYou from 'views/about-you'
 
 import * as serviceWorker from './serviceWorker'
+
+Sentry.init({ dsn: 'https://f083b25b9f144c3483ab04389b5fab78@o418462.ingest.sentry.io/5321420' })
 
 const store = createStore(
   rootReducer,
