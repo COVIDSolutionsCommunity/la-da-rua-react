@@ -15,7 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { useNavigate, Link as RouterLink } from '@reach/router'
 
 import { registerUser } from 'modules/user/actions'
-import { isRegisterLoading } from 'modules/user/selectors'
+import { isRegisterLoading, registerError } from 'modules/user/selectors'
 import { usePrevious, useReactGA } from 'utils/hooks'
 import GeneralInput from 'components/general-input'
 
@@ -68,6 +68,7 @@ const SignIn = () => {
   const [errors, setErros] = useState('')
   const [profilePicture, setProfilePicture] = useState([])
   const isLoading = useSelector(isRegisterLoading)
+  const error = useSelector(registerError)
   const wasLoading = usePrevious(isLoading)
   const navigate = useNavigate()
 
@@ -139,10 +140,18 @@ const SignIn = () => {
   )
 
   useEffect(() => {
-    if (!isLoading && wasLoading) {
-      navigate('/sobre-seu-negocio')
+    if (error !== undefined && Object.keys(error).length) {
+      Object.entries(error).map((value) =>
+        setErros((prevValues) => ({ ...prevValues, [value[0]]: value[1] }))
+      )
     }
-  }, [isLoading, navigate, wasLoading])
+  }, [error])
+
+  useEffect(() => {
+    if (!isLoading && wasLoading && error === undefined) {
+      navigate('/cadastre-seu-negocio')
+    }
+  }, [error, isLoading, navigate, wasLoading])
 
   useReactGA('cadastre-se')
   return (

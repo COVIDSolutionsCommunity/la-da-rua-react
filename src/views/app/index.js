@@ -72,8 +72,8 @@ const App = ({ children }) => {
                 LOG OUT
               </Button>
             ) : (
-              <Button component={RouterLink} className={styles.link} to="/cadastre-se">
-                CADASTRE-SE
+              <Button component={RouterLink} className={styles.link} to="/login">
+                LOGIN
               </Button>
             )}
           </Grid>

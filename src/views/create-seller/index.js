@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Link from '@material-ui/core/Link'
 import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { useNavigate } from '@reach/router'
+import { useNavigate, useLocation } from '@reach/router'
 
 import { createSeller, getSeller, updateSeller } from 'modules/user/actions'
 import { isCreatingSeller, getMySeller, isUpdatingSeller } from 'modules/user/selectors'
@@ -109,11 +109,14 @@ const CreateSeller = () => {
   const wasLoading = usePrevious(isLoading)
   const isUpdatingLoading = useSelector(isUpdatingSeller)
   const wasUpdatingLoading = usePrevious(isUpdatingLoading)
+  const location = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(getSeller())
-  }, [dispatch])
+    if (location.pathname === '/sobre-seu-negocio') {
+      dispatch(getSeller())
+    }
+  }, [dispatch, location.pathname])
 
   useEffect(() => {
     if (isCurrent?.name.length) {

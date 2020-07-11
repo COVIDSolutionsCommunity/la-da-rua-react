@@ -96,4 +96,8 @@ export default makeStyles((theme) => ({
     color: theme.palette.custom.red,
     textAlign: 'center',
   },
+  buttonSignIn: {
+    marginTop: '3.6rem',
+    backgroundColor: theme.palette.custom.yellow,
+  },
 }))

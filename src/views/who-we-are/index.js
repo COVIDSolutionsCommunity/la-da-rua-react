@@ -2,6 +2,8 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import ReactPlayer from 'react-player'
+import Button from '@material-ui/core/Button'
+import { Link as RouterLink } from '@reach/router'
 
 import { useResizer } from 'utils/hooks'
 import whoWeAre from 'assets/quem_somos.png'
@@ -33,6 +35,17 @@ const WhoWeAre = () => {
             src={whoWeAre}
           />
         </Grid>
+      </Grid>
+      <Grid item xs={10}>
+        <Button
+          component={RouterLink}
+          to="/cadastre-se"
+          variant="outlined"
+          color="inherit"
+          className={styles.buttonSignIn}
+        >
+          CLIQUE AQUI PARA SE CADASTRAR NO LÁ DA RUA
+        </Button>
       </Grid>
       {!isMobile && (
         <ReactPlayer

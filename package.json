@@ -34,6 +34,7 @@
     "react-player": "^2.3.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
+    "react-slick": "^0.26.1",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "redux-define": "^1.1.1",
@@ -42,7 +43,8 @@
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "shiitake": "^3.0.2"
+    "shiitake": "^3.0.2",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "craco start",

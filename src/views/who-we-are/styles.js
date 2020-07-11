@@ -38,4 +38,8 @@ export default makeStyles((theme) => ({
   url: {
     margin: '32px 0',
   },
+  buttonSignIn: {
+    marginTop: '3.6rem',
+    backgroundColor: theme.palette.custom.yellow,
+  },
 }))

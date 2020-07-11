@@ -131,6 +131,18 @@ const Login = () => {
                 {isLoading ? <CircularProgress size={24} /> : 'ENTRAR'}
               </Button>
             </Grid>
+            <Grid item xs={10}>
+              <Button
+                fullWidth
+                component={RouterLink}
+                to="/cadastre-se"
+                variant="outlined"
+                color="inherit"
+                className={styles.buttonSignIn}
+              >
+                OU CLIQUE AQUI PARA SE CADASTRAR NO LÁ DA RUA
+              </Button>
+            </Grid>
           </Grid>
         </form>
       </Grid>

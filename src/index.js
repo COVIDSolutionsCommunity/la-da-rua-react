@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import promiseMiddleware from 'redux-promise-middleware'
+import promise from 'redux-promise-middleware'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import './index.css'
@@ -33,9 +33,20 @@ import * as serviceWorker from './serviceWorker'
 
 Sentry.init({ dsn: 'https://f083b25b9f144c3483ab04389b5fab78@o418462.ingest.sentry.io/5321420' })
 
+const errorMiddleware = () => {
+  return (next) => (action) => {
+    const result = next(action)
+
+    if (!(result instanceof Promise)) {
+      return action
+    }
+
+    return result.catch(() => {})
+  }
+}
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk, promiseMiddleware, logger))
+  composeWithDevTools(applyMiddleware(...[thunk, errorMiddleware, promise], logger))
 )
 
 const theme = createMuiTheme({
@@ -130,12 +141,10 @@ const theme = createMuiTheme({
       },
     },
     MuiFormLabel: {
-      focused: {
-        borderColor: '1px solid white',
-      },
       root: {
-        // fontSize: '16px',
-        color: 'white',
+        '&$focused': {
+          borderColor: '1px solid white',
+        },
       },
     },
     MuiInputBase: {
@@ -150,8 +159,10 @@ const theme = createMuiTheme({
       },
     },
     MuiOutlinedInput: {
-      focused: {
-        borderColor: 'white',
+      root: {
+        '&$focused': {
+          borderColor: '1px solid white',
+        },
       },
       notchedOutline: {
         borderColor: 'white',
@@ -179,6 +190,7 @@ ReactDOM.render(
           <Login path="/login" />
           <Welcome path="/bem-vindo" />
           <CreateSeller path="/sobre-seu-negocio" />
+          <CreateSeller path="/cadastre-seu-negocio" />
           <Product path="/produto" />
           <ThankYou path="/obrigada" />
           <SupportUs path="/apoie-o-projeto" />
