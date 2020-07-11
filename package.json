@@ -43,15 +43,17 @@
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "serve": "^11.3.2",
     "shiitake": "^3.0.2",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "serve -s build",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "heroku-postbuild": "craco build"
   },
   "eslintConfig": {
     "extends": "react-app"

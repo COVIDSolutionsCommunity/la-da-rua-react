@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 import { CATEGORIES_COLORS, CATEGORIES_PORTUGUESE } from 'utils/constants'
 import { getSeller } from 'modules/sellers/actions'
@@ -39,6 +42,14 @@ const Seller = () => {
     )
   }
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  }
+
   return (
     <Grid className={styles.view}>
       <Grid item container alignItems="center" direction="column">
@@ -69,12 +80,14 @@ const Seller = () => {
           {seller.description}
         </Typography>
       </Grid>
-      <Grid item className={styles.products}>
-        {seller?.products?.map((product) => (
-          <Link to={`${product.id}`} key={product.id} className={styles.img}>
-            <img className={styles.product} src={product.image} alt="Imagem de capa da loja" />
-          </Link>
-        ))}
+      <Grid item className={styles.photo}>
+        <Slider {...settings}>
+          {seller?.products?.map((product) => (
+            <Link key={product.id} to={`${product.id}`} className={styles.img}>
+              <img className={styles.product} src={product.image} alt="Imagem de capa da loja" />
+            </Link>
+          ))}
+        </Slider>
       </Grid>
     </Grid>
   )

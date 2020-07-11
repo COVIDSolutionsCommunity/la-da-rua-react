@@ -41,16 +41,15 @@ export default makeStyles((theme) => ({
     backgroundColor: '#CD59C8',
   },
   img: {
-    height: '200px',
-    width: '200px',
-    margin: 8,
-    position: 'relative',
+    height: '500px',
+    width: '500px',
+    margin: 'auto',
     backgroundColor: theme.palette.secondary.main,
   },
   product: {
-    height: '200px',
-    width: '200px',
-    margin: 8,
+    height: '500px',
+    width: '500px',
+    margin: 'auto',
 
     '&:hover': {
       opacity: 0.15,
@@ -72,5 +71,9 @@ export default makeStyles((theme) => ({
     left: 15,
     zIndex: 2,
     fontSize: '14px',
+  },
+  photo: {
+    height: '500px',
+    width: '500px',
   },
 }))
