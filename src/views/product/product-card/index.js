@@ -152,7 +152,17 @@ const ProductCard = ({
                 {isLoading ? <CircularProgress size={24} /> : 'ATUALIZAR PRODUTO'}
               </Button>
             ) : (
-              <Button variant="outlined" color="primary" onClick={onAddClick} disabled={isLoading}>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={onAddClick}
+                disabled={
+                  isLoading ||
+                  !values[id].description.length ||
+                  !values[id].price.length ||
+                  !values[id].name.length
+                }
+              >
                 {isLoading ? <CircularProgress size={24} /> : 'ADICIONAR PRODUTO'}
               </Button>
             )}
@@ -164,22 +174,26 @@ const ProductCard = ({
 }
 
 ProductCard.propTypes = {
-  values: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string,
-    price: PropTypes.string,
-  }).isRequired,
+  values: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      description: PropTypes.string,
+      price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    })
+  ).isRequired,
   onChange: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func.isRequired,
-  onChangePicture: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func,
+  onChangePicture: PropTypes.func,
   onDeleteProductClick: PropTypes.func.isRequired,
   onUpdateClick: PropTypes.func,
   onAddClick: PropTypes.func,
   isLoading: PropTypes.bool,
   id: PropTypes.number.isRequired,
-  profilePicture: PropTypes.shape({
-    url: PropTypes.string,
-  }).isRequired,
+  profilePicture: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string,
+    })
+  ).isRequired,
   isPrevious: PropTypes.bool,
 }
 
@@ -188,6 +202,8 @@ ProductCard.defaultProps = {
   isPrevious: false,
   onUpdateClick: () => {},
   onAddClick: () => {},
+  onDeleteClick: () => {},
+  onChangePicture: () => {},
 }
 
 export default React.memo(ProductCard)
