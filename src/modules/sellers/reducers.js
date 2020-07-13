@@ -20,18 +20,17 @@ const getProductPage = (page) => (page ? getPage(page) : undefined)
 
 const returnNewProducts = (previousState, payload) => {
   const products = payload.results
+  // const newProducts = payload.next ? [...previousState?.seller?.products, products] : products
 
-  const newProducts = payload.next ? [...previousState.seller.products, products] : products
-
-  previousState.result = newProducts
+  previousState.result = products
   previousState.next = getProductPage(payload.new)
   previousState.previous = payload.previous
 }
 
 const sellers = createReducer(INITIAL_STATE, {
   [GET_SELLERS_CATEGORY.FULFILLED]: (state, { payload }) => {
-    return produce(state, (previousState) => {
-      returnNewProducts(previousState, payload)
+    return produce(state, () => {
+      returnNewProducts(state, payload)
     })
   },
   [GET_SELLERS_SEARCH.FULFILLED]: (state, { payload }) => {
