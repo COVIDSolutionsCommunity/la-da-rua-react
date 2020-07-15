@@ -6,13 +6,18 @@ import { CATEGORIES_NAMES } from 'utils/constants'
 
 export const getSellers = () => get()('sellers/')
 
-export const getSellersCategory = (category) =>
-  get()(`sellers/?category=${CATEGORIES_NAMES[category]}`, {
+export const getSellersCategory = (category, page = null) => {
+  const hasPage = page
+    ? `sellers/?category=${CATEGORIES_NAMES[category]}&page=${page}`
+    : `sellers/?category=${CATEGORIES_NAMES[category]}`
+  return get()(hasPage, {
     params: {
-      category,
       page_size: 50,
+      category,
+      page,
     },
   })
+}
 
 export const getSellersSearch = (category, name) =>
   get()(`sellers/?category=${CATEGORIES_NAMES[category]}$name=${name}`, {

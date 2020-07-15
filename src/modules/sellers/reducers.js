@@ -6,9 +6,10 @@ import { createReducer } from 'utils/redux'
 import { GET_SELLERS_CATEGORY, GET_SELLERS_SEARCH, GET_CURRENT_SELLER } from './actions'
 
 const INITIAL_STATE = {
-  result: '',
+  result: [],
   next: '',
   currentSeller: {},
+  count: '',
 }
 
 export const getPage = (query) =>
@@ -18,24 +19,25 @@ export const getPage = (query) =>
 
 const getProductPage = (page) => (page ? getPage(page) : undefined)
 
-const returnNewProducts = (previousState, payload) => {
+const returnNewProducts = (previousState, state, payload) => {
   const products = payload.results
-  // const newProducts = payload.next ? [...previousState?.seller?.products, products] : products
+  const newProducts = state.result.length ? [...state?.result, ...products] : products
 
-  previousState.result = products
-  previousState.next = getProductPage(payload.new)
+  previousState.result = newProducts
+  previousState.count = payload.count
+  previousState.next = getProductPage(payload.next)
   previousState.previous = payload.previous
 }
 
 const sellers = createReducer(INITIAL_STATE, {
   [GET_SELLERS_CATEGORY.FULFILLED]: (state, { payload }) => {
-    return produce(state, () => {
-      returnNewProducts(state, payload)
+    return produce(state, (previousState) => {
+      returnNewProducts(previousState, state, payload)
     })
   },
   [GET_SELLERS_SEARCH.FULFILLED]: (state, { payload }) => {
     return produce(state, (previousState) => {
-      returnNewProducts(previousState, payload)
+      returnNewProducts(previousState, state, payload)
     })
   },
   [GET_CURRENT_SELLER.FULFILLED]: (state, { payload }) => {

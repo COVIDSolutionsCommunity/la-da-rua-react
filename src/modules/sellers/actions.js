@@ -36,3 +36,9 @@ export const buySomething = (slug, payload) => (dispatch) => {
     payload: sellersServices.buySomething(slug, payload),
   })
 }
+
+export const getNextPage = (category) => (dispatch, getState) =>
+  dispatch({
+    type: GET_SELLERS_CATEGORY.ACTION,
+    payload: sellersServices.getSellersCategory(category, getState().sellers.next),
+  })
