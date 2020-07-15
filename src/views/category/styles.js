@@ -53,4 +53,7 @@ export default makeStyles((theme) => ({
   variedades: {
     backgroundColor: '#FFC720',
   },
+  more: {
+    margin: '1.6rem 0',
+  },
 }))

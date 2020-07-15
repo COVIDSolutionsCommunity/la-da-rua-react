@@ -10,6 +10,7 @@ export const isBuying = ({ loading }) => !!loading[BUY_SOMETHING.ACTION]
 export const getSellers = (state) => state.sellers.result
 const getParam = (state, param) => param
 export const currentSeller = (state) => state.sellers.currentSeller
+export const getCount = (state) => state.sellers.count
 export const currentSellerProducts = (state) => state.sellers.currentSeller.products
 
 export const getCurrentProduct = createSelector([currentSellerProducts, getParam], (products, id) =>
