@@ -87,7 +87,8 @@ const Login = () => {
           <Typography className={styles.text} color="primary" component="h2" variant="h2">
             Ei, Microempreendedor de Fortaleza! Está precisando de uma ajudinha com as vendas e
             ainda que fazer parte de uma rede que está ativamente ajudando no combate ao COVID-19?
-            Com o seu cadastro, será possível atualizar as suas informações!{' '}
+            Com o seu cadastro <strong>inteiramente gratuito</strong> , será possível atualizar as
+            suas informações!{' '}
             <Link component={RouterLink} to="/cadastre-se">
               Para se cadastrar, clique aqui
             </Link>

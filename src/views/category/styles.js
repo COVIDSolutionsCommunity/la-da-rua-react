@@ -2,11 +2,16 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
   content: {
-    width: '100vw',
+    width: 'calc(100vw - 16px)',
+    height: '100vh',
+  },
+  loading: {
+    margin: '32px 0',
   },
   container: {
-    width: '100vw',
+    width: '100%',
     padding: '10px 40px 40px',
+    boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
   },

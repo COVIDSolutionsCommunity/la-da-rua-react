@@ -1,6 +1,7 @@
 import { defineAction } from 'redux-define'
 
 import * as sellersServices from 'services/sellers'
+import { CATEGORIES_NAMES } from 'utils/constants'
 
 const REQUEST = ['PENDING', 'FULFILLED', 'REJECTED', 'COUNT']
 
@@ -40,5 +41,8 @@ export const buySomething = (slug, payload) => (dispatch) => {
 export const getNextPage = (category) => (dispatch, getState) =>
   dispatch({
     type: GET_SELLERS_CATEGORY.ACTION,
-    payload: sellersServices.getSellersCategory(category, getState().sellers.next),
+    payload: sellersServices.getSellersCategory(
+      category,
+      getState().sellers[CATEGORIES_NAMES[category][0]].next
+    ),
   })

@@ -10,23 +10,11 @@ export const getSellersCategory = (category, page = null) => {
   const hasPage = page
     ? `sellers/?category=${CATEGORIES_NAMES[category]}&page=${page}`
     : `sellers/?category=${CATEGORIES_NAMES[category]}`
-  return get()(hasPage, {
-    params: {
-      page_size: 50,
-      category,
-      page,
-    },
-  })
+  return get()(hasPage)
 }
 
 export const getSellersSearch = (category, name) =>
-  get()(`sellers/?category=${CATEGORIES_NAMES[category]}$name=${name}`, {
-    params: {
-      category,
-      name,
-      page_size: 50,
-    },
-  })
+  get()(`sellers/?category=${CATEGORIES_NAMES[category]}&name=${name}`)
 
 export const getSeller = (slug) => get()(`sellers/${slug}/`)
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useCallback } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { useParams, Link, useNavigate } from '@reach/router'
+import { useParams, Link } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
@@ -19,7 +19,6 @@ const SellerProduct = () => {
   const styles = useStyles()
   const { slug, id } = useParams()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const seller = useSelector(currentSeller)
   const currentProduct = useSelector((state) => getCurrentProduct(state, id))
   const [open, handleClose] = useModal()
@@ -29,10 +28,6 @@ const SellerProduct = () => {
       dispatch(getSeller(slug))
     }
   }, [dispatch, seller.name, slug])
-
-  const goBack = useCallback(() => {
-    navigate(-1)
-  }, [navigate])
 
   const anotherProducts = useMemo(
     () => seller?.products?.filter((product) => product.id !== Number(id)),
@@ -60,7 +55,8 @@ const SellerProduct = () => {
         </Grid>
         <Grid item className={styles.products}>
           <Button
-            onClick={goBack}
+            component={Link}
+            to={`/loja/${slug}`}
             className={styles.button}
             color="primary"
             startIcon={<KeyboardBackspaceIcon />}

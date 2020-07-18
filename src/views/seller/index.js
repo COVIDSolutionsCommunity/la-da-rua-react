@@ -12,6 +12,7 @@ import { CATEGORIES_COLORS, CATEGORIES_PORTUGUESE } from 'utils/constants'
 import { getSeller } from 'modules/sellers/actions'
 import { currentSeller } from 'modules/sellers/selectors'
 import { useReactGA } from 'utils/hooks'
+import logo from 'assets/colagem_logo.png'
 
 import useStyles from './styles'
 
@@ -69,12 +70,21 @@ const Seller = () => {
           {seller.description}
         </Typography>
       </Grid>
-      <Grid item className={styles.products}>
-        {seller?.products?.map((product) => (
-          <Link to={`${product.id}`} key={product.id} className={styles.img}>
-            <img className={styles.product} src={product.image} alt="Imagem de capa da loja" />
-          </Link>
-        ))}
+      <Grid item component="section" className={styles.products}>
+        {seller?.products.length ? (
+          seller?.products?.map((product) => (
+            <Link to={`${product.id}`} key={product.id} className={styles.img}>
+              <img className={styles.product} src={product.image} alt="Imagem de capa da loja" />
+            </Link>
+          ))
+        ) : (
+          <Grid container justify="center" alignItems="center" direction="column">
+            <Typography color="secondary" className={styles.about} component="h3" variant="h3">
+              Em breve, esta loja irá expor os seus produtos aqui no Lá Da Rua!
+            </Typography>
+            <img src={logo} alt="Logo lá da rua" />
+          </Grid>
+        )}
       </Grid>
     </Grid>
   )
