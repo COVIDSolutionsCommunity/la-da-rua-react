@@ -27,6 +27,11 @@ export default makeStyles((theme) => ({
   item: {
     padding: '20px',
     backgroundColor: 'white',
+    textDecoration: 'none',
+
+    '&:hover': {
+      opacity: '0.5',
+    },
   },
   about: {
     [theme.breakpoints.down('sm')]: {
@@ -37,37 +42,10 @@ export default makeStyles((theme) => ({
     borderTop: '1px solid black',
   },
   coverImage: {
-    objectFit: 'cover',
+    objectFit: 'scale-down',
     height: '200px',
     width: '200px',
     borderRadius: '50%',
     marginBottom: '10px',
-  },
-  img: {
-    height: '200px',
-    width: '200px',
-    margin: 8,
-    position: 'relative',
-    backgroundColor: theme.palette.secondary.main,
-    marginBottom: '10px',
-  },
-  product: {
-    height: '200px',
-    width: '200px',
-    margin: 8,
-
-    '&:hover': {
-      opacity: 0.15,
-      backgroundColor: theme.palette.secondary.main,
-    },
-  },
-  button: {
-    [theme.breakpoints.down('sm')]: {
-      padding: '20px',
-    },
-  },
-  padding: {
-    padding: '10px 50px',
-    boxSizing: 'border-box',
   },
 }))
