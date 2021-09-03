@@ -22,7 +22,7 @@
     "craco-less": "^1.16.0",
     "formik": "^2.1.4",
     "humps": "^2.0.1",
-    "immer": "^6.0.5",
+    "immer": "^9.0.6",
     "moment": "^2.25.3",
     "normalizr": "^3.6.0",
     "prop-types": "^15.7.2",
